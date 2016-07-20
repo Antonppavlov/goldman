@@ -6,7 +6,7 @@ import java.io.Serializable;
  * класс работает с координатами объекта. Каждый объект в игре имеет свои
  * координаты
  */
-public class  Coordinate implements Serializable {
+public class Coordinate implements Serializable {
 
     private int x;
     private int y;

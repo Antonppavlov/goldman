@@ -75,13 +75,13 @@ public class GameFrame extends BaseChildFrame {
 
     private void createPanelControlGame() {
         btnUp = new JButton();
-        btnUp.setPreferredSize(new Dimension(40,40));
+        btnUp.setPreferredSize(new Dimension(40, 40));
         btnDown = new JButton();
-        btnDown.setPreferredSize(new Dimension(40,40));
+        btnDown.setPreferredSize(new Dimension(40, 40));
         btnLeft = new JButton();
-        btnLeft.setPreferredSize(new Dimension(40,40));
+        btnLeft.setPreferredSize(new Dimension(40, 40));
         btnRight = new JButton();
-        btnRight.setPreferredSize(new Dimension(40,40));
+        btnRight.setPreferredSize(new Dimension(40, 40));
 
         btnUp.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/up.png")));
         btnDown.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/down.png")));

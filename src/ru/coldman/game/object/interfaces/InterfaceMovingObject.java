@@ -14,8 +14,11 @@ public interface InterfaceMovingObject {
     void getMoveResult(AbstractGameObject objectInNewCoordinate);
 
     ImageIcon getIconLeft();
+
     ImageIcon getIconUp();
+
     ImageIcon getIconDown();
+
     ImageIcon getIconRight();
 
 }

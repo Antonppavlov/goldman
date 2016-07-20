@@ -63,7 +63,7 @@ public class StatisticFrame extends BaseChildFrame {
     }
 
 
-    private void addListener(){
+    private void addListener() {
         btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,7 +72,7 @@ public class StatisticFrame extends BaseChildFrame {
         });
     }
 
-    private void btnReturnListener(){
+    private void btnReturnListener() {
         this.closeFrame();
     }
 }

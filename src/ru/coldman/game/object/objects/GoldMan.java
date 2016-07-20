@@ -11,8 +11,8 @@ import ru.coldman.game.object.enums.MovingDirection;
  */
 public class GoldMan extends AbstractMovingObject {
 
-    private int totalScore=0;
-    private int totalNumberSteps=0;
+    private int totalScore = 0;
+    private int totalNumberSteps = 0;
 
     public GoldMan(Coordinate coordinate) {
         super.setIconRight("ru/coldman/game/images/goldman_right.png");
@@ -33,8 +33,8 @@ public class GoldMan extends AbstractMovingObject {
     }
 
 
-    public void addIntTotalScore(int score){
-        this.totalScore+=score;
+    public void addIntTotalScore(int score) {
+        this.totalScore += score;
     }
 
     public int getTotalScore() {

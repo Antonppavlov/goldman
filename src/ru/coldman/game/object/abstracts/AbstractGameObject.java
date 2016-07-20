@@ -9,9 +9,9 @@ import javax.swing.*;
 /**
  * Created by Антон on 19.07.2016.
  */
-public abstract class AbstractGameObject implements InterfaceImmovableObject{
+public abstract class AbstractGameObject implements InterfaceImmovableObject {
 
-    private ImageIcon imageIcon= new ImageIcon(getClass().getResource("\\ru\\coldman\\game\\images\\noicon.png"));
+    private ImageIcon imageIcon = new ImageIcon(getClass().getResource("\\ru\\coldman\\game\\images\\noicon.png"));
     private Coordinate coordinate;
     private GameObjectType gameObjectType;
 

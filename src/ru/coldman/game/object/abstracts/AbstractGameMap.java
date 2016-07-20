@@ -34,9 +34,9 @@ public abstract class AbstractGameMap implements InterfaceGameMaps, Serializable
         if (tmpList == null) {
             tmpList = new ArrayList<>();
         }
-        
+
         tmpList.add(gameObject);
-        
+
         gameObjects.put(gameObject.getCoordinate(), gameObject);
         typeObjects.put(gameObject.getType(), tmpList);
     }
@@ -94,10 +94,9 @@ public abstract class AbstractGameMap implements InterfaceGameMaps, Serializable
 
     public AbstractGameObject getPriorityObject(AbstractGameObject firstObject, AbstractGameObject secondObject) {
         // приоритет объекта зависит от номера индекса объекта enum
-        if(firstObject.getType().getIndexPriority() > secondObject.getType().getIndexPriority()){
+        if (firstObject.getType().getIndexPriority() > secondObject.getType().getIndexPriority()) {
             return firstObject;
-        }
-        else return secondObject;
+        } else return secondObject;
     }
 
     public boolean isValidMap() {

@@ -23,8 +23,8 @@ public class LoadGameFrame extends BaseChildFrame {
 
     public LoadGameFrame() {
         btnReturn = new Button("<< Return to menu");
-        btnLoadGame=new Button("Load game");
-        btnDelete=new Button("Delete");
+        btnLoadGame = new Button("Load game");
+        btnDelete = new Button("Delete");
 
         tableGames = new JTable();
         scrollPane1 = new JScrollPane();
@@ -36,21 +36,21 @@ public class LoadGameFrame extends BaseChildFrame {
 
     }
 
-    private void createButton(){
+    private void createButton() {
         btnLoadGame.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/load_small.png"))); // NOI18N
         btnDelete.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/delete.png"))); // NOI18N
 
     }
 
-    private void createTable(){
+    private void createTable() {
         tableGames.setModel(new DefaultTableModel(
-                new Object [][] {
+                new Object[][]{
                         {null, null, null, null},
                         {null, null, null, null},
                         {null, null, null, null},
                         {null, null, null, null}
                 },
-                new String [] {
+                new String[]{
                         "Title 1", "Title 2", "Title 3", "Title 4"
                 }
         ));
@@ -59,8 +59,8 @@ public class LoadGameFrame extends BaseChildFrame {
 
     }
 
-    private void createFrame(){
-        JPanel panel =new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    private void createFrame() {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panel.add(btnLoadGame);
         panel.add(btnDelete);
 
@@ -68,12 +68,12 @@ public class LoadGameFrame extends BaseChildFrame {
         panel2.add(btnReturn);
 
         setLayout(new BorderLayout());
-        getContentPane().add(panel2,BorderLayout.NORTH);
-        getContentPane().add(scrollPane1,BorderLayout.CENTER);
-        getContentPane().add(panel,BorderLayout.SOUTH);
+        getContentPane().add(panel2, BorderLayout.NORTH);
+        getContentPane().add(scrollPane1, BorderLayout.CENTER);
+        getContentPane().add(panel, BorderLayout.SOUTH);
     }
 
-    private void addListener(){
+    private void addListener() {
         btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,7 +82,7 @@ public class LoadGameFrame extends BaseChildFrame {
         });
     }
 
-    private void btnReturnListener(){
+    private void btnReturnListener() {
         this.closeFrame();
     }
 }

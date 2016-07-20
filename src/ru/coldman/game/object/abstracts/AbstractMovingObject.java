@@ -9,10 +9,10 @@ import javax.swing.*;
  */
 public abstract class AbstractMovingObject extends AbstractGameObject implements InterfaceMovingObject {
 
-   private ImageIcon iconLeft;
-   private ImageIcon iconUp;
-   private ImageIcon iconDown;
-   private ImageIcon iconRight;
+    private ImageIcon iconLeft;
+    private ImageIcon iconUp;
+    private ImageIcon iconDown;
+    private ImageIcon iconRight;
 
 
     @Override

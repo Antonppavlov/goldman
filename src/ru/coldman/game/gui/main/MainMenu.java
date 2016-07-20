@@ -41,7 +41,7 @@ public class MainMenu extends JFrame {
 
         gameFrame = new GameFrame();
         statisticFrame = new StatisticFrame();
-        loadGameFrame=  new LoadGameFrame();
+        loadGameFrame = new LoadGameFrame();
         addListenerButton();
     }
 
@@ -89,21 +89,20 @@ public class MainMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
 
-
-              //
-              //  Object[] options = { "Yes", "No" };
-              //  JOptionPane.showOptionDialog(null, "Exit game?",
-              //          "", JOptionPane.YES_NO_OPTION,
-              //          JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                //
+                //  Object[] options = { "Yes", "No" };
+                //  JOptionPane.showOptionDialog(null, "Exit game?",
+                //          "", JOptionPane.YES_NO_OPTION,
+                //          JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 //
-              //  this.setVisible(false);
+                //  this.setVisible(false);
                 System.exit(0);
             }
         });
     }
 
 
-    private void btnStatistics(){
+    private void btnStatistics() {
         statisticFrame.showFrame(this);
     }
 

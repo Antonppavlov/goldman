@@ -67,12 +67,12 @@ public class FSGameMap extends AbstractGameMap {
         return true;
 
     }
-    
+
     private void createGameObject(String str, Coordinate coordinate) {
 
         GameObjectType type = GameObjectType.valueOf(str.toUpperCase());
 
-    
+
         AbstractGameObject newObj = GameObjectCreator.getInstance().createObject(type, coordinate);
 
         addGameObject(newObj);
