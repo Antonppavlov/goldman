@@ -1,8 +1,8 @@
 package ru.coldman.game.object.abstracts;
 
-import ru.coldman.game.object.Coordinate;
+import ru.coldman.game.object.objects.Coordinate;
 import ru.coldman.game.object.enums.GameObjectType;
-import ru.coldman.game.object.interfaces.InterfaceGameMaps;
+import ru.coldman.game.object.interfaces.map.InterfaceGameMap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.HashMap;
  * базовая карта без конкретного отображения
  */
 // Serializable нужен для сериализации (сохранения) объекта карты, чтобы можно было сохранять игру и восстанавливать
-public abstract class AbstractGameMap implements InterfaceGameMaps, Serializable {
+public abstract class AbstractGameMap implements InterfaceGameMap, Serializable {
 
     private static final long serialVersionUID = 1L;
     private int width;
@@ -30,15 +30,19 @@ public abstract class AbstractGameMap implements InterfaceGameMaps, Serializable
 
     //метод по добавлению объектов
     public void addGameObject(AbstractGameObject gameObject) {
+        //находим передеваемый тип объекта в коллекции typeObjects
+        // и создаём кололлекцию этих объектов из коллекции typeObjects с названием tmpList
         ArrayList<AbstractGameObject> tmpList = typeObjects.get(gameObject.getType());
 
+        //если таких объектов там нет то создать коллекцию
         if (tmpList == null) {
             tmpList = new ArrayList<>();
         }
-
+        //Добавляем этот элемент к коллекции таких же элементов
         tmpList.add(gameObject);
-
+        //в коллецию gameObjects передаём  ключ:координаты и объект
         gameObjects.put(gameObject.getCoordinate(), gameObject);
+        //в коллецию typeObjects передаём ключ: тип объекта и как объект коллекцию объектов
         typeObjects.put(gameObject.getType(), tmpList);
     }
 

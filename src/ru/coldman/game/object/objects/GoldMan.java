@@ -1,6 +1,5 @@
 package ru.coldman.game.object.objects;
 
-import ru.coldman.game.object.Coordinate;
 import ru.coldman.game.object.abstracts.AbstractGameObject;
 import ru.coldman.game.object.abstracts.AbstractMovingObject;
 import ru.coldman.game.object.enums.GameObjectType;
@@ -15,11 +14,11 @@ public class GoldMan extends AbstractMovingObject {
     private int totalNumberSteps = 0;
 
     public GoldMan(Coordinate coordinate) {
-        super.setIconRight("ru/coldman/game/images/goldman_right.png");
-        super.setIconLeft("ru/coldman/game/images/goldman_left.png");
-        super.setIconUp("ru/coldman/game/images/up.png");
-        super.setIconDown("ru/coldman/game/images/down.png");
-        super.setIcon("ru/coldman/game/images/up.png");
+        super.setIconRight("/ru/coldman/game/images/goldman_right.png");
+        super.setIconLeft("/ru/coldman/game/images/goldman_left.png");
+        super.setIconUp("/ru/coldman/game/images/up.png");
+        super.setIconDown("/ru/coldman/game/images/down.png");
+        super.setIcon("/ru/coldman/game/images/up.png");
         super.setCoordinate(coordinate);
         super.setGameObjectType(GameObjectType.GOLDMAN);
     }

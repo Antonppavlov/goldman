@@ -1,6 +1,6 @@
 package ru.coldman.game.object.objects.maps;
 
-import ru.coldman.game.object.Coordinate;
+import ru.coldman.game.object.objects.Coordinate;
 import ru.coldman.game.object.abstracts.AbstractGameMap;
 import ru.coldman.game.object.abstracts.AbstractGameObject;
 import ru.coldman.game.object.enums.GameObjectType;
@@ -87,7 +87,7 @@ public class FSGameMap extends AbstractGameMap {
 
         //создаём асбтрактый объект передав туда тип объекта используя патерн фабрика объектов
         AbstractGameObject newObj = GameObjectCreator.getInstance().createObject(type, coordinate);
-        //добавляем объект в коллекции отпавив в метод addGameObject
+        //добавляем объект в коллекции отпавив в метод addGameObject абстрактного класса AbstractGameMap
         addGameObject(newObj);
 
 
@@ -130,8 +130,4 @@ public class FSGameMap extends AbstractGameMap {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
-    public boolean drawMap() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 }

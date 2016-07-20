@@ -21,9 +21,9 @@ public class MainMenu extends JFrame {
     private final Button btnStatistics;
     private final Button btnExit;
 
-    private final GameFrame gameFrame;
-    private final StatisticFrame statisticFrame;
-    private final LoadGameFrame loadGameFrame;
+    private GameFrame gameFrame;
+    private StatisticFrame statisticFrame;
+    private LoadGameFrame loadGameFrame;
 
     public MainMenu() {
         this.btnNewGame = new Button("New game");
@@ -39,9 +39,7 @@ public class MainMenu extends JFrame {
 
         createWindows();
 
-        gameFrame = new GameFrame();
-        statisticFrame = new StatisticFrame();
-        loadGameFrame = new LoadGameFrame();
+
         addListenerButton();
     }
 
@@ -87,15 +85,6 @@ public class MainMenu extends JFrame {
         btnExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
-                //
-                //  Object[] options = { "Yes", "No" };
-                //  JOptionPane.showOptionDialog(null, "Exit game?",
-                //          "", JOptionPane.YES_NO_OPTION,
-                //          JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-//
-                //  this.setVisible(false);
                 System.exit(0);
             }
         });
@@ -103,14 +92,17 @@ public class MainMenu extends JFrame {
 
 
     private void btnStatistics() {
+        statisticFrame = new StatisticFrame();
         statisticFrame.showFrame(this);
     }
 
     private void btnLoadGame() {
+        loadGameFrame = new LoadGameFrame();
         loadGameFrame.showFrame(this);
     }
 
     private void btnNewGame() {
+        gameFrame = new GameFrame();
         gameFrame.showFrame(this);
     }
 }

@@ -1,20 +1,19 @@
-package ru.coldman.game.object.interfaces;
+package ru.coldman.game.object.interfaces.map;
 
 /**
  * интерфейс для игровой карты
  */
-public interface InterfaceGameMaps {
+public interface InterfaceGameMap {
 
     int getHeight();
 
     int getWidth();
 
+    int getTimeLimit();
+
     boolean loadMap(Object source);
 
     boolean saveMap(Object source);
 
-    boolean drawMap();
-
-    int getTimeLimit();
 
 }

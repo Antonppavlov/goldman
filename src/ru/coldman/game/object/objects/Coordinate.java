@@ -1,4 +1,4 @@
-package ru.coldman.game.object;
+package ru.coldman.game.object.objects;
 
 import java.io.Serializable;
 

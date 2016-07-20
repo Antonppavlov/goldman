@@ -3,6 +3,7 @@ package ru.coldman.game.gui.child.game;
 
 import ru.coldman.game.gui.child.BaseChildFrame;
 import ru.coldman.game.gui.main.element.Panel;
+import ru.coldman.game.object.objects.maps.FSGameMap;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,11 +36,19 @@ public class GameFrame extends BaseChildFrame {
     private JButton btnExit;
     private JPanel panelGamePanel;
 
+
+    private  FSGameMap fsGameMap;
     public GameFrame() {
         createGamePlayArea();
         createMenuBar();
         createPanelControlGame();
         createFrame();
+        loadGame("C:\\Users\\Антон\\IdeaProjects\\goldman\\goldman\\src\\resources\\game.txt");
+    }
+
+    private void loadGame(String pathToFile) {
+        fsGameMap=new FSGameMap();
+        fsGameMap.loadMap(pathToFile);
     }
 
 
@@ -120,5 +129,7 @@ public class GameFrame extends BaseChildFrame {
         panelGamePanel.add(new Panel(btnSave));
         panelGamePanel.add(new Panel(btnExit));
     }
+
+
 
 }

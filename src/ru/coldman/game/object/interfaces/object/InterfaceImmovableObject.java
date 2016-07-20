@@ -1,6 +1,6 @@
-package ru.coldman.game.object.interfaces;
+package ru.coldman.game.object.interfaces.object;
 
-import ru.coldman.game.object.Coordinate;
+import ru.coldman.game.object.objects.Coordinate;
 import ru.coldman.game.object.enums.GameObjectType;
 
 import javax.swing.*;

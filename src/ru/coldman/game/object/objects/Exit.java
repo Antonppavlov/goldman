@@ -1,6 +1,5 @@
 package ru.coldman.game.object.objects;
 
-import ru.coldman.game.object.Coordinate;
 import ru.coldman.game.object.abstracts.AbstractGameObject;
 import ru.coldman.game.object.enums.GameObjectType;
 

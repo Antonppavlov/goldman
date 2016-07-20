@@ -1,4 +1,4 @@
-package ru.coldman.game.object.interfaces;
+package ru.coldman.game.object.interfaces.object;
 
 import ru.coldman.game.object.abstracts.AbstractGameObject;
 import ru.coldman.game.object.enums.MovingDirection;
