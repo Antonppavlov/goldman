@@ -1,11 +1,12 @@
-package ru.coldman.game.object.abstracts;
+package ru.coldman.game.abstracts;
 
-import ru.coldman.game.object.objects.Coordinate;
-import ru.coldman.game.object.enums.GameObjectType;
-import ru.coldman.game.object.interfaces.map.InterfaceGameMap;
+import ru.coldman.game.objects.Coordinate;
+import ru.coldman.game.enums.GameObjectType;
+import ru.coldman.game.interfaces.map.InterfaceGameMap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashMap;
 
@@ -44,6 +45,17 @@ public abstract class AbstractGameMap implements InterfaceGameMap, Serializable 
         gameObjects.put(gameObject.getCoordinate(), gameObject);
         //в коллецию typeObjects передаём ключ: тип объекта и как объект коллекцию объектов
         typeObjects.put(gameObject.getType(), tmpList);
+    }
+
+    public AbstractGameObject getPriorityObject(AbstractGameObject firstObject, AbstractGameObject secondObject) {
+        // приоритет объекта зависит от номера индекса объекта enum
+        if (firstObject.getType().getIndexPriority() > secondObject.getType().getIndexPriority()) {
+            return firstObject;
+        } else return secondObject;
+    }
+
+    public Collection<AbstractGameObject> getAllGameObjects() {
+        return gameObjects.values();
     }
 
     public boolean isExitExist() {
@@ -97,12 +109,6 @@ public abstract class AbstractGameMap implements InterfaceGameMap, Serializable 
         this.timeLimit = timeLimit;
     }
 
-    public AbstractGameObject getPriorityObject(AbstractGameObject firstObject, AbstractGameObject secondObject) {
-        // приоритет объекта зависит от номера индекса объекта enum
-        if (firstObject.getType().getIndexPriority() > secondObject.getType().getIndexPriority()) {
-            return firstObject;
-        } else return secondObject;
-    }
 
     public boolean isValidMap() {
         return goldManExist && exitExist; // если есть и вход и выход - карта валидна

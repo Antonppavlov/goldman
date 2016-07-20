@@ -1,11 +1,11 @@
-package ru.coldman.game.object.interfaces.map;
+package ru.coldman.game.interfaces.map;
 
 import java.awt.*;
 
 /**
  * Created by Антон on 20.07.2016.
  */
-public interface InterfaceDrawGameMap {
+public interface InterfaceDrawableGameMap {
 
     Component getMap();
 

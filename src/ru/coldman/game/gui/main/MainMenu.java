@@ -1,7 +1,9 @@
 package ru.coldman.game.gui.main;
 
 
+import ru.coldman.game.enums.LocationType;
 import ru.coldman.game.gui.child.game.GameFrame;
+import ru.coldman.game.gui.child.game.maps.JTableGameMap;
 import ru.coldman.game.gui.child.load.LoadGameFrame;
 import ru.coldman.game.gui.child.statistic.StatisticFrame;
 import ru.coldman.game.gui.main.element.Button;
@@ -25,17 +27,19 @@ public class MainMenu extends JFrame {
     private StatisticFrame statisticFrame;
     private LoadGameFrame loadGameFrame;
 
+    private JTableGameMap gameMap = new JTableGameMap(LocationType.FS,"C:\\Users\\Антон\\IdeaProjects\\goldman\\goldman\\src\\resources\\game.txt");
+
     public MainMenu() {
         this.btnNewGame = new Button("New game");
-        btnNewGame.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/new.png"))); // NOI18N
+        btnNewGame.setIcon(new ImageIcon(getClass().getResource("/resources/images/new.png"))); // NOI18N
         this.btnLoadGame = new Button("Load game");
-        btnLoadGame.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/load.png"))); // NOI18N
+        btnLoadGame.setIcon(new ImageIcon(getClass().getResource("/resources/images/load.png"))); // NOI18N
 
         this.btnStatistics = new Button("Statistics");
-        btnStatistics.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/stat.png"))); // NOI18N
+        btnStatistics.setIcon(new ImageIcon(getClass().getResource("/resources/images/stat.png"))); // NOI18N
 
         this.btnExit = new Button("Exit");
-        btnExit.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/exit.png"))); // NOI18N
+        btnExit.setIcon(new ImageIcon(getClass().getResource("/resources/images/exit.png"))); // NOI18N
 
         createWindows();
 
@@ -103,6 +107,7 @@ public class MainMenu extends JFrame {
 
     private void btnNewGame() {
         gameFrame = new GameFrame();
+        gameFrame.setMap(gameMap);
         gameFrame.showFrame(this);
     }
 }

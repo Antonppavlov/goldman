@@ -1,10 +1,10 @@
-package ru.coldman.game.object.objects.maps;
+package ru.coldman.game.objects.maps;
 
-import ru.coldman.game.object.objects.Coordinate;
-import ru.coldman.game.object.abstracts.AbstractGameMap;
-import ru.coldman.game.object.abstracts.AbstractGameObject;
-import ru.coldman.game.object.enums.GameObjectType;
-import ru.coldman.game.object.objects.creators.GameObjectCreator;
+import ru.coldman.game.objects.Coordinate;
+import ru.coldman.game.abstracts.AbstractGameMap;
+import ru.coldman.game.abstracts.AbstractGameObject;
+import ru.coldman.game.enums.GameObjectType;
+import ru.coldman.game.objects.creators.GameObjectCreator;
 
 import java.io.BufferedReader;
 import java.io.File;

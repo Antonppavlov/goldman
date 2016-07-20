@@ -1,10 +1,10 @@
-package ru.coldman.game.object.objects.creators;
+package ru.coldman.game.objects.creators;
 
 
-import ru.coldman.game.object.objects.Coordinate;
-import ru.coldman.game.object.abstracts.AbstractGameObject;
-import ru.coldman.game.object.enums.GameObjectType;
-import ru.coldman.game.object.objects.*;
+import ru.coldman.game.objects.Coordinate;
+import ru.coldman.game.abstracts.AbstractGameObject;
+import ru.coldman.game.enums.GameObjectType;
+import ru.coldman.game.objects.*;
 
 public class GameObjectCreator {
 

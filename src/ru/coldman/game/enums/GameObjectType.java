@@ -1,4 +1,4 @@
-package ru.coldman.game.object.enums;
+package ru.coldman.game.enums;
 
 import java.io.Serializable;
 

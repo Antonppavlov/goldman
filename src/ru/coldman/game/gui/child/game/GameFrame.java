@@ -3,7 +3,8 @@ package ru.coldman.game.gui.child.game;
 
 import ru.coldman.game.gui.child.BaseChildFrame;
 import ru.coldman.game.gui.main.element.Panel;
-import ru.coldman.game.object.objects.maps.FSGameMap;
+import ru.coldman.game.interfaces.map.InterfaceDrawableGameMap;
+import ru.coldman.game.objects.maps.FSGameMap;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +39,9 @@ public class GameFrame extends BaseChildFrame {
 
 
     private  FSGameMap fsGameMap;
+
+    private InterfaceDrawableGameMap gameMap; // передаем объект карты, которая умеет себя рисовать
+
     public GameFrame() {
         createGamePlayArea();
         createMenuBar();
@@ -92,10 +96,10 @@ public class GameFrame extends BaseChildFrame {
         btnRight = new JButton();
         btnRight.setPreferredSize(new Dimension(40, 40));
 
-        btnUp.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/up.png")));
-        btnDown.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/down.png")));
-        btnLeft.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/left.png")));
-        btnRight.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/right.png")));
+        btnUp.setIcon(new ImageIcon(getClass().getResource("/resources/images/up.png")));
+        btnDown.setIcon(new ImageIcon(getClass().getResource("/resources/images/down.png")));
+        btnLeft.setIcon(new ImageIcon(getClass().getResource("/resources/images/left.png")));
+        btnRight.setIcon(new ImageIcon(getClass().getResource("/resources/images/right.png")));
 
         JPanel panelControlGame = new JPanel();
         panelControlGame.setLayout(new BorderLayout());
@@ -116,9 +120,9 @@ public class GameFrame extends BaseChildFrame {
         panelScore.add(textTurnsLeft);
 
         btnSave = new ru.coldman.game.gui.main.element.Button("Save");
-        btnSave.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/save.png"))); // NOI18N
+        btnSave.setIcon(new ImageIcon(getClass().getResource("/resources/images/save.png"))); // NOI18N
         btnExit = new ru.coldman.game.gui.main.element.Button("Exit game");
-        btnExit.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/exit.png"))); // NOI18N
+        btnExit.setIcon(new ImageIcon(getClass().getResource("/resources/images/exit.png"))); // NOI18N
 
 
         panelGamePanel = new JPanel();
@@ -131,5 +135,12 @@ public class GameFrame extends BaseChildFrame {
     }
 
 
+    public void setMap(InterfaceDrawableGameMap gameMap){
+        this.gameMap = gameMap;
+        gameMap.drawMap();
+
+        panelGamePlayArea.removeAll();
+        panelGamePlayArea.add(gameMap.getMap());
+    }
 
 }

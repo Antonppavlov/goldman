@@ -1,8 +1,8 @@
-package ru.coldman.game.object.abstracts;
+package ru.coldman.game.abstracts;
 
-import ru.coldman.game.object.objects.Coordinate;
-import ru.coldman.game.object.enums.GameObjectType;
-import ru.coldman.game.object.interfaces.object.InterfaceImmovableObject;
+import ru.coldman.game.objects.Coordinate;
+import ru.coldman.game.enums.GameObjectType;
+import ru.coldman.game.interfaces.object.InterfaceImmovableObject;
 
 import javax.swing.*;
 
@@ -11,13 +11,16 @@ import javax.swing.*;
  */
 public abstract class AbstractGameObject implements InterfaceImmovableObject {
 
-    private ImageIcon imageIcon = new ImageIcon(getClass().getResource("/ru/coldman/game/images/noicon.png"));
+    private ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/images/noicon.png"));
     private Coordinate coordinate;
     private GameObjectType gameObjectType;
-   // C:\Users\Антон\IdeaProjects\goldman\goldman\src\ru\coldman\game\images\noicon.png
 
     public void setIcon(String pathImageIcon) {
         this.imageIcon = new ImageIcon(getClass().getResource(pathImageIcon));
+    }
+
+    public ImageIcon getIcon(){
+        return imageIcon;
     }
 
     public void setCoordinate(Coordinate coordinate) {

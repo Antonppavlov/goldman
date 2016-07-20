@@ -1,7 +1,7 @@
-package ru.coldman.game.object.objects;
+package ru.coldman.game.objects;
 
-import ru.coldman.game.object.abstracts.AbstractGameObject;
-import ru.coldman.game.object.enums.GameObjectType;
+import ru.coldman.game.abstracts.AbstractGameObject;
+import ru.coldman.game.enums.GameObjectType;
 
 /**
  * Created by Антон on 19.07.2016.
@@ -9,7 +9,7 @@ import ru.coldman.game.object.enums.GameObjectType;
 public class Exit extends AbstractGameObject {
 
     public Exit(Coordinate coordinate) {
-        setIcon("/ru/coldman/game/images/exit.gif");
+        setIcon("/resources/images/exit.gif");
         setGameObjectType(GameObjectType.EXIT);
         setCoordinate(coordinate);
     }

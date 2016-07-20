@@ -1,4 +1,4 @@
-package ru.coldman.game.object.enums;
+package ru.coldman.game.enums;
 
 /**
  * Created by Антон on 19.07.2016.

@@ -1,7 +1,7 @@
-package ru.coldman.game.object.interfaces.object;
+package ru.coldman.game.interfaces.object;
 
-import ru.coldman.game.object.abstracts.AbstractGameObject;
-import ru.coldman.game.object.enums.MovingDirection;
+import ru.coldman.game.abstracts.AbstractGameObject;
+import ru.coldman.game.enums.MovingDirection;
 
 import javax.swing.*;
 

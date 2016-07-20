@@ -37,8 +37,8 @@ public class LoadGameFrame extends BaseChildFrame {
     }
 
     private void createButton() {
-        btnLoadGame.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/load_small.png"))); // NOI18N
-        btnDelete.setIcon(new ImageIcon(getClass().getResource("/ru/coldman/game/images/delete.png"))); // NOI18N
+        btnLoadGame.setIcon(new ImageIcon(getClass().getResource("/resources/images/load_small.png"))); // NOI18N
+        btnDelete.setIcon(new ImageIcon(getClass().getResource("/resources/images/delete.png"))); // NOI18N
 
     }
 

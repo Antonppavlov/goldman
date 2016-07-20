@@ -1,9 +1,9 @@
-package ru.coldman.game.object.objects;
+package ru.coldman.game.objects;
 
-import ru.coldman.game.object.abstracts.AbstractGameObject;
-import ru.coldman.game.object.abstracts.AbstractMovingObject;
-import ru.coldman.game.object.enums.GameObjectType;
-import ru.coldman.game.object.enums.MovingDirection;
+import ru.coldman.game.abstracts.AbstractGameObject;
+import ru.coldman.game.abstracts.AbstractMovingObject;
+import ru.coldman.game.enums.GameObjectType;
+import ru.coldman.game.enums.MovingDirection;
 
 /**
  * Created by Антон on 19.07.2016.
@@ -14,11 +14,11 @@ public class GoldMan extends AbstractMovingObject {
     private int totalNumberSteps = 0;
 
     public GoldMan(Coordinate coordinate) {
-        super.setIconRight("/ru/coldman/game/images/goldman_right.png");
-        super.setIconLeft("/ru/coldman/game/images/goldman_left.png");
-        super.setIconUp("/ru/coldman/game/images/up.png");
-        super.setIconDown("/ru/coldman/game/images/down.png");
-        super.setIcon("/ru/coldman/game/images/up.png");
+        super.setIconRight("/resources/images/goldman_right.png");
+        super.setIconLeft("/resources/images/goldman_left.png");
+        super.setIconUp("/resources/images/up.png");
+        super.setIconDown("/resources/images/down.png");
+        super.setIcon("/resources/images/up.png");
         super.setCoordinate(coordinate);
         super.setGameObjectType(GameObjectType.GOLDMAN);
     }
