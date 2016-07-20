@@ -13,6 +13,6 @@ public interface InterfaceImmovableObject {
 
     Coordinate getCoordinate();
 
-    GameObjectType getGameObjectType();
+    GameObjectType getType();
 
 }

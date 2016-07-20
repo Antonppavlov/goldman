@@ -1,12 +1,11 @@
 package ru.coldman.game.gui.main;
 
+
 import ru.coldman.game.gui.child.game.GameFrame;
 import ru.coldman.game.gui.child.load.LoadGameFrame;
+import ru.coldman.game.gui.child.statistic.StatisticFrame;
 import ru.coldman.game.gui.main.element.Button;
 import ru.coldman.game.gui.main.element.Panel;
-import ru.coldman.game.gui.child.statistic.StatisticFrame;
-import ru.coldman.game.gui.child.statistic.StatisticFrame;
-import ru.coldman.game.gui.main.element.Button;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +23,7 @@ public class MainMenu extends JFrame {
 
     private final GameFrame gameFrame;
     private final StatisticFrame statisticFrame;
-    private final  LoadGameFrame loadGameFrame;
+    private final LoadGameFrame loadGameFrame;
 
     public MainMenu() {
         this.btnNewGame = new Button("New game");

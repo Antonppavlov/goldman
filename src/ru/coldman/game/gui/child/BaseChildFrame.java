@@ -1,8 +1,8 @@
 package ru.coldman.game.gui.child;
 
+import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JFrame;
 
 public abstract class BaseChildFrame extends JFrame {
     

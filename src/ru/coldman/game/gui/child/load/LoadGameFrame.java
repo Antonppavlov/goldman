@@ -2,12 +2,10 @@ package ru.coldman.game.gui.child.load;
 
 import ru.coldman.game.gui.child.BaseChildFrame;
 import ru.coldman.game.gui.main.element.Button;
-import ru.coldman.game.gui.main.element.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
