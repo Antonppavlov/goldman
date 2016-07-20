@@ -1,4 +1,4 @@
-package ru.coldman.game.object.inter;
+package ru.coldman.game.object.interfaces;
 
 /**
  * интерфейс для игровой карты

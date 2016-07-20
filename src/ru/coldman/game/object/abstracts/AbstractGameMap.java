@@ -2,7 +2,7 @@ package ru.coldman.game.object.abstracts;
 
 import ru.coldman.game.object.Coordinate;
 import ru.coldman.game.object.enums.GameObjectType;
-import ru.coldman.game.object.inter.InterfaceGameMaps;
+import ru.coldman.game.object.interfaces.InterfaceGameMaps;
 
 import java.io.Serializable;
 import java.util.ArrayList;

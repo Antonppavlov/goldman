@@ -1,6 +1,6 @@
 package ru.coldman.game.object.abstracts;
 
-import ru.coldman.game.object.inter.InterfaceMovingObject;
+import ru.coldman.game.object.interfaces.InterfaceMovingObject;
 
 import javax.swing.*;
 

@@ -24,6 +24,15 @@ public class GoldMan extends AbstractMovingObject {
         super.setGameObjectType(GameObjectType.GOLDMAN);
     }
 
+    @Override
+    public void move(MovingDirection movingDirection) {
+    }
+
+    @Override
+    public void getMoveResult(AbstractGameObject objectInNewCoordinate) {
+    }
+
+
     public void addIntTotalScore(int score){
         this.totalScore+=score;
     }
@@ -44,11 +53,4 @@ public class GoldMan extends AbstractMovingObject {
         this.totalNumberSteps = totalNumberSteps;
     }
 
-    @Override
-    public void move(MovingDirection movingDirection) {
-    }
-
-    @Override
-    public void getMoveResult(AbstractGameObject objectInNewCoordinate) {
-    }
 }

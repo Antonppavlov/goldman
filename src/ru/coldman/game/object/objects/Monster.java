@@ -9,9 +9,9 @@ import ru.coldman.game.object.enums.MovingDirection;
 /**
  * Created by Антон on 19.07.2016.
  */
-public class Moster  extends AbstractMovingObject {
+public class Monster extends AbstractMovingObject {
 
-    public Moster(Coordinate coordinate) {
+    public Monster(Coordinate coordinate) {
         super.setIconRight("ru/coldman/game/images/monster_right.jpg");
         super.setIconLeft("ru/coldman/game/images/monster_left.jpg");
         super.setIconUp("ru/coldman/game/images/monster_up.jpg");

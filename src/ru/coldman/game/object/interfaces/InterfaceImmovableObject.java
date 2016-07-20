@@ -1,4 +1,4 @@
-package ru.coldman.game.object.inter;
+package ru.coldman.game.object.interfaces;
 
 import ru.coldman.game.object.Coordinate;
 import ru.coldman.game.object.enums.GameObjectType;

@@ -2,7 +2,7 @@ package ru.coldman.game.object.abstracts;
 
 import ru.coldman.game.object.Coordinate;
 import ru.coldman.game.object.enums.GameObjectType;
-import ru.coldman.game.object.inter.InterfaceImmovableObject;
+import ru.coldman.game.object.interfaces.InterfaceImmovableObject;
 
 import javax.swing.*;
 
