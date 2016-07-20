@@ -13,7 +13,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+//класс реализации ЗАГУЗКИ
+//СОХРАНЕНИЯ
+//ОТРИСОВКИ 
+//карты
 public class FSGameMap extends AbstractGameMap {
 
 
@@ -27,28 +30,37 @@ public class FSGameMap extends AbstractGameMap {
         try {
             setExitExist(false);
             setGoldManExist(false);
-
+            
+            //Устанавливаем высоту
             setHeight(getLineCount(file));
 
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            //берем весь текст из файла и помещаем в буфер 
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 
-            String strLine = br.readLine().trim(); // считываем первую строку для определения имени, длины, ширины карты. убираем пробела по краям
+            // считываем первую строку для определения имени, длины, ширины карты. убираем пробела по краям
+            String strLine = bufferedReader.readLine().trim(); 
 
-            // разбиваем первую строку на токены, разделенные запятой.            
-            setName(strLine.split(",")[0]);
+            // разбиваем первую строку на токены, разделенные запятой.
+            String[] textsInFirstLine = strLine.split(",");
+            //Первый элемент это имя
+            setName(textsInFirstLine[0]);
+            //второй время
+            setTimeLimit(Integer.valueOf(textsInFirstLine[1]).intValue());
+            //третий ширина
+            setWidth(Integer.valueOf(textsInFirstLine[2]).intValue());
 
-            setTimeLimit(Integer.valueOf(strLine.split(",")[1]).intValue());
-            setWidth(Integer.valueOf(strLine.split(",")[2]).intValue());
-
+            //переменные для координат
             int y = 0; // номер строки в массиве
-            int x = 0; // номер столбца в массиве
+            int x; // номер столбца в массиве
 
-            while ((strLine = br.readLine()) != null) {
-                x = 0; // чтобы каждый раз с первого столбца начинал
-
+            //берем строку из файла
+            while ((strLine = bufferedReader.readLine()) != null) {
+                // чтобы каждый раз с первого столбца начинал
+                x = 0;
+                //бьём на массив стингов через , и обращаемся к каждой стринге
                 for (String str : strLine.split(",")) {
-                    // вытаскивать все значения в строке между запятыми, чтобы заполнить карту элементами
 
+            //отправляем стирнг и её координаты в метод createGameObject
                     createGameObject(str, new Coordinate(x, y));
                     x++;
                 }
@@ -67,16 +79,19 @@ public class FSGameMap extends AbstractGameMap {
         return true;
 
     }
-
+    //метод принимает на вход стринг и координаты
     private void createGameObject(String str, Coordinate coordinate) {
 
+        //Вычисляем какой тип объекта передаётся в стинг
         GameObjectType type = GameObjectType.valueOf(str.toUpperCase());
 
-
+        //создаём асбтрактый объект передав туда тип объекта используя патерн фабрика объектов
         AbstractGameObject newObj = GameObjectCreator.getInstance().createObject(type, coordinate);
-
+        //добавляем объект в коллекции отпавив в метод addGameObject
         addGameObject(newObj);
 
+
+        //если тип объекта EXIT или GOLDMAN меняем значения соотвествующих переменных
         if (newObj.getType() == GameObjectType.EXIT) {
             setExitExist(true);
         } else if (newObj.getType() == GameObjectType.GOLDMAN) {
@@ -84,7 +99,7 @@ public class FSGameMap extends AbstractGameMap {
         }
 
     }
-
+    //метод возвращает количество строчек в файле -1 т.к. первая строка не относится к карте
     private int getLineCount(File file) {
         BufferedReader reader = null;
         int lineCount = 0;
@@ -94,7 +109,8 @@ public class FSGameMap extends AbstractGameMap {
             while (reader.readLine() != null) {
                 lineCount++;
             }
-            lineCount = lineCount - 1;// lineNumber-1 потому что первая строка из файла не входит в карту
+            lineCount = lineCount - 1;
+            // lineNumber-1 потому что первая строка из файла не входит в карту
         } catch (IOException ex) {
             Logger.getLogger(FSGameMap.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

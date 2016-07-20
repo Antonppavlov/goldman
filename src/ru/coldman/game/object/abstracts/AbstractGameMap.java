@@ -11,7 +11,8 @@ import java.util.HashMap;
 
 /**
  * базовая карта без конкретного отображения
- */// Serializable нужен для сериализации (сохранения) объекта карты, чтобы можно было сохранять игру и восстанавливать
+ */
+// Serializable нужен для сериализации (сохранения) объекта карты, чтобы можно было сохранять игру и восстанавливать
 public abstract class AbstractGameMap implements InterfaceGameMaps, Serializable {
 
     private static final long serialVersionUID = 1L;
