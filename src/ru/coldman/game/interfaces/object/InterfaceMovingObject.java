@@ -6,10 +6,11 @@ import ru.coldman.game.enums.MovingDirection;
 import javax.swing.*;
 
 /**
- * Created by Антон on 19.07.2016.
+ * Интерфейс для движемых объектов
  */
 public interface InterfaceMovingObject {
-    void move(MovingDirection movingDirection); //передаём направление для перемещения
+    //передаём направление из enum MovingDirection для перемещения
+    void move(MovingDirection movingDirection);
 
     void getMoveResult(AbstractGameObject objectInNewCoordinate);
 

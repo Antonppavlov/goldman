@@ -5,7 +5,7 @@ import ru.coldman.game.interfaces.object.InterfaceMovingObject;
 import javax.swing.*;
 
 /**
- * Created by Антон on 19.07.2016.
+ * Класс движемых игровых объектов. наследуется от класса не движемых игрвых объектов и имплементит интерфейс движемых объектов
  */
 public abstract class AbstractMovingObject extends AbstractGameObject implements InterfaceMovingObject {
 

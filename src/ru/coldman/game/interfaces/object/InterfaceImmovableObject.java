@@ -6,7 +6,7 @@ import ru.coldman.game.enums.GameObjectType;
 import javax.swing.*;
 
 /**
- * Created by Антон on 19.07.2016.
+ * Интерфейс для не движемых объектов
  */
 public interface InterfaceImmovableObject {
     ImageIcon getImageIcon();

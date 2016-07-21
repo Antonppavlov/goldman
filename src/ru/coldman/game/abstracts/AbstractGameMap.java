@@ -11,7 +11,8 @@ import java.util.EnumMap;
 import java.util.HashMap;
 
 /**
- * базовая карта без конкретного отображения
+ * базовый функционал для заполнения массивов из какого-то источника
+ * далее из этих массивов будет заполнена карта
  */
 // Serializable нужен для сериализации (сохранения) объекта карты, чтобы можно было сохранять игру и восстанавливать
 public abstract class AbstractGameMap implements InterfaceGameMap, Serializable {
@@ -53,6 +54,18 @@ public abstract class AbstractGameMap implements InterfaceGameMap, Serializable 
             return firstObject;
         } else return secondObject;
     }
+    public ArrayList<AbstractGameObject> getList(GameObjectType type) {
+        return typeObjects.get(type);
+    }
+
+    public AbstractGameObject getObjectByCoordinate(Coordinate coordinate) {
+        return gameObjects.get(coordinate);
+    }
+
+    public AbstractGameObject getObjectByCoordinate(int x, int y) {
+        return gameObjects.get(new Coordinate(x, y));
+    }
+
 
     public Collection<AbstractGameObject> getAllGameObjects() {
         return gameObjects.values();
@@ -114,15 +127,5 @@ public abstract class AbstractGameMap implements InterfaceGameMap, Serializable 
         return goldManExist && exitExist; // если есть и вход и выход - карта валидна
     }
 
-    public ArrayList<AbstractGameObject> getList(GameObjectType type) {
-        return typeObjects.get(type);
-    }
 
-    public AbstractGameObject getObjectByCoordinate(Coordinate coordinate) {
-        return gameObjects.get(coordinate);
-    }
-
-    public AbstractGameObject getObjectByCoordinate(int x, int y) {
-        return gameObjects.get(new Coordinate(x, y));
-    }
 }

@@ -1,7 +1,7 @@
 package ru.coldman.game.interfaces.map;
 
 /**
- * интерфейс для игровой карты
+ * интерфейс для загрузки\сохранения карты
  */
 public interface InterfaceGameMap {
 

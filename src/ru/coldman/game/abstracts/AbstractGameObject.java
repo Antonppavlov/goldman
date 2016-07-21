@@ -7,7 +7,7 @@ import ru.coldman.game.interfaces.object.InterfaceImmovableObject;
 import javax.swing.*;
 
 /**
- * Created by Антон on 19.07.2016.
+ * Абстрактый класс который импрелементит интерфейс не движемых игровых объектов
  */
 public abstract class AbstractGameObject implements InterfaceImmovableObject {
 
