@@ -43,7 +43,7 @@ public class JTableGameMap implements InterfaceDrawableGameMap {
         gameMap = MapCreator.getInstance().createMap(type);
         gameMap.loadMap(source);
 
-
+        updateObjectsArray();
     }
     private void fillEmptyMap(int width, int height) {
         for (int y = 0; y < height; y++) {

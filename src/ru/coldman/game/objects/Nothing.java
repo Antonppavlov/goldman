@@ -10,6 +10,6 @@ public class Nothing extends AbstractGameObject {
     public Nothing(Coordinate coordinate) {
         super.setGameObjectType(GameObjectType.NOTHING);
         super.setCoordinate(coordinate);
-      //  super.setIcon(null);
+        super.setIcon(null);
     }
 }

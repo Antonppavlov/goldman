@@ -16,10 +16,13 @@ public abstract class AbstractGameObject implements InterfaceImmovableObject {
     private GameObjectType gameObjectType;
 
     public void setIcon(String pathImageIcon) {
-        this.imageIcon = new ImageIcon(getClass().getResource(pathImageIcon));
+        if (pathImageIcon == null) {
+            imageIcon = null;
+        } else
+            this.imageIcon = new ImageIcon(getClass().getResource(pathImageIcon));
     }
 
-    public ImageIcon getIcon(){
+    public ImageIcon getIcon() {
         return imageIcon;
     }
 

@@ -50,22 +50,9 @@ public class GameFrame extends BaseChildFrame {
         loadGame("C:\\Users\\Антон\\IdeaProjects\\goldman\\goldman\\src\\resources\\game.txt");
     }
 
-    private void loadGame(String pathToFile) {
-        fsGameMap=new FSGameMap();
-        fsGameMap.loadMap(pathToFile);
-    }
-
-
-    private void createFrame() {
-        this.setJMenuBar(menuBar);
-        setLayout(new FlowLayout());
-        getContentPane().add(panelGamePlayArea);
-        getContentPane().add(panelGamePanel);
-    }
-
     private void createGamePlayArea() {
         panelGamePlayArea = new JPanel();
-        panelGamePlayArea.setPreferredSize(new Dimension(300, 300));
+        panelGamePlayArea.setBorder(BorderFactory.createEtchedBorder());
     }
 
     private void createMenuBar() {
@@ -133,6 +120,23 @@ public class GameFrame extends BaseChildFrame {
         panelGamePanel.add(new Panel(btnSave));
         panelGamePanel.add(new Panel(btnExit));
     }
+
+
+    private void loadGame(String pathToFile) {
+        fsGameMap=new FSGameMap();
+        fsGameMap.loadMap(pathToFile);
+    }
+
+
+    private void createFrame() {
+        this.setJMenuBar(menuBar);
+        setLayout(new FlowLayout());
+        getContentPane().add(panelGamePlayArea);
+        getContentPane().add(panelGamePanel);
+    }
+
+
+
 
 
     public void setMap(InterfaceDrawableGameMap gameMap){

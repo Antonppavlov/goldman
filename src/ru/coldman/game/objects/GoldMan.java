@@ -16,9 +16,9 @@ public class GoldMan extends AbstractMovingObject {
     public GoldMan(Coordinate coordinate) {
         super.setIconRight("/resources/images/goldman_right.png");
         super.setIconLeft("/resources/images/goldman_left.png");
-        super.setIconUp("/resources/images/up.png");
-        super.setIconDown("/resources/images/down.png");
-        super.setIcon("/resources/images/up.png");
+        super.setIconUp("/resources/images/goldman_up.png");
+        super.setIconDown("/resources/images/goldman_down.png");
+        super.setIcon("/resources/images/goldman_up.png");
         super.setCoordinate(coordinate);
         super.setGameObjectType(GameObjectType.GOLDMAN);
     }
