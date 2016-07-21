@@ -47,7 +47,7 @@ public class GameFrame extends BaseChildFrame {
         createMenuBar();
         createPanelControlGame();
         createFrame();
-        loadGame("C:\\Users\\Антон\\IdeaProjects\\goldman\\goldman\\src\\resources\\game.txt");
+        loadGame("src\\resources\\maps\\game.txt");
     }
 
     private void createGamePlayArea() {

@@ -10,6 +10,7 @@ import ru.coldman.game.gui.main.element.Button;
 import ru.coldman.game.gui.main.element.Panel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,7 +28,7 @@ public class MainMenu extends JFrame {
     private StatisticFrame statisticFrame;
     private LoadGameFrame loadGameFrame;
 
-    private JTableGameMap gameMap = new JTableGameMap(LocationType.FS,"C:\\Users\\Антон\\IdeaProjects\\goldman\\goldman\\src\\resources\\game.txt");
+    private JTableGameMap gameMap = new JTableGameMap(LocationType.FS,"src/resources/maps/game.txt");
 
     public MainMenu() {
         this.btnNewGame = new Button("New game");
@@ -56,7 +57,10 @@ public class MainMenu extends JFrame {
         panel.add(new Panel(btnExit));
 
         getContentPane().add(panel);
+
+        setPreferredSize(new Dimension(270,250));
         pack();
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setLocationRelativeTo(null);
