@@ -8,7 +8,7 @@ import javax.swing.*;
 /**
  * Интерфейс для движемых объектов
  */
-public interface InterfaceMovingObject {
+public interface InterfaceMovingObject extends InterfaceImmovableObject{
     //передаём направление из enum MovingDirection для перемещения
     void move(MovingDirection movingDirection);
 
