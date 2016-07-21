@@ -1,4 +1,4 @@
-package ru.coldman.game.objects.creators;
+package ru.coldman.game.creators;
 
 
 import ru.coldman.game.objects.Coordinate;

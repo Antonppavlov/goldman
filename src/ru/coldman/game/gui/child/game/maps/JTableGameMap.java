@@ -8,7 +8,7 @@ import ru.coldman.game.interfaces.map.InterfaceDrawableGameMap;
 import ru.coldman.game.objects.Coordinate;
 import ru.coldman.game.objects.Nothing;
 import ru.coldman.game.objects.Wall;
-import ru.coldman.game.objects.creators.MapCreator;
+import ru.coldman.game.creators.MapCreator;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -44,36 +44,6 @@ public class JTableGameMap implements InterfaceDrawableGameMap {
         gameMap.loadMap(source);
 
         updateObjectsArray();
-    }
-    private void fillEmptyMap(int width, int height) {
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                mapObjects[y][x] = new Nothing(new Coordinate(x, y));
-            }
-        }
-    }
-
-
-    private void updateObjectsArray() {
-
-        mapObjects = new AbstractGameObject[gameMap.getHeight()][gameMap.getWidth()];
-
-        fillEmptyMap(gameMap.getWidth(), gameMap.getHeight());
-
-        // потом заполнить массив объектами
-        for (AbstractGameObject gameObj : gameMap.getAllGameObjects()) {
-            if (!gameObj.getType().equals(GameObjectType.NOTHING)) {// пустоты не добавляем, т.к. они уже добавились когда мы вызвали метод fillEmptyMap()
-                int y = gameObj.getCoordinate().getY();
-                int x = gameObj.getCoordinate().getX();
-                if (!(mapObjects[y][x] instanceof Nothing) & // если в этих координатах уже есть какой то объект, отличный от пустоты и стены
-                        !(mapObjects[y][x] instanceof Wall)) {
-                    AbstractGameObject tmpObj = mapObjects[y][x];
-                    mapObjects[y][x] = gameMap.getPriorityObject(tmpObj, gameObj);
-                } else {
-                    mapObjects[y][x] = gameObj;// проставить объект на карте согласно его координатам
-                }
-            }
-        }
     }
 
     @Override
@@ -111,6 +81,40 @@ public class JTableGameMap implements InterfaceDrawableGameMap {
     public Component getMap() {
         return jTableMap;
     }
+
+
+
+    private void updateObjectsArray() {
+
+        mapObjects = new AbstractGameObject[gameMap.getHeight()][gameMap.getWidth()];
+
+        fillEmptyMap(gameMap.getWidth(), gameMap.getHeight());
+
+        // потом заполнить массив объектами
+        for (AbstractGameObject gameObj : gameMap.getAllGameObjects()) {
+            if (!gameObj.getType().equals(GameObjectType.NOTHING)) {// пустоты не добавляем, т.к. они уже добавились когда мы вызвали метод fillEmptyMap()
+                int y = gameObj.getCoordinate().getY();
+                int x = gameObj.getCoordinate().getX();
+                if (!(mapObjects[y][x] instanceof Nothing) & // если в этих координатах уже есть какой то объект, отличный от пустоты и стены
+                        !(mapObjects[y][x] instanceof Wall)) {
+                    AbstractGameObject tmpObj = mapObjects[y][x];
+                    mapObjects[y][x] = gameMap.getPriorityObject(tmpObj, gameObj);
+                } else {
+                    mapObjects[y][x] = gameObj;// проставить объект на карте согласно его координатам
+                }
+            }
+        }
+    }
+
+    private void fillEmptyMap(int width, int height) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                mapObjects[y][x] = new Nothing(new Coordinate(x, y));
+            }
+        }
+    }
+
+
 }
 
 
