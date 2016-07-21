@@ -53,6 +53,7 @@ public class JTableGameMap implements InterfaceDrawableGameMap {
             // присваиваем пустоту всем заголовкам столбцов, чтобы у таблицы не было заголовоков, а то некрасиво смотрится
             columnNames = new String[gameMap.getWidth()];
 
+
             for (int i = 0; i < columnNames.length; i++) {
                 columnNames[i] = "";
             }
