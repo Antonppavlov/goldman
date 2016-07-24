@@ -1,8 +1,8 @@
 package ru.coldman.game.abstracts;
 
-import ru.coldman.game.objects.Coordinate;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.interfaces.object.InterfaceImmovableObject;
+import ru.coldman.game.objects.Coordinate;
 
 import javax.swing.*;
 
@@ -11,27 +11,17 @@ import javax.swing.*;
  */
 public abstract class AbstractGameObject implements InterfaceImmovableObject {
 
-    private ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/images/noicon.png"));
-    private Coordinate coordinate;
-    private GameObjectType gameObjectType;
 
-    public void setIcon(String pathImageIcon) {
+    private GameObjectType gameObjectType;// все объекты будут иметь тип
+    private Coordinate coordinate;// все объекты будут иметь координаты положения
+
+    private ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/images/noicon.png"));
+
+    public void setIcon(ImageIcon pathImageIcon) {
         if (pathImageIcon == null) {
             imageIcon = null;
         } else
-            this.imageIcon = new ImageIcon(getClass().getResource(pathImageIcon));
-    }
-
-    public ImageIcon getIcon() {
-        return imageIcon;
-    }
-
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-    }
-
-    public void setGameObjectType(GameObjectType gameObjectType) {
-        this.gameObjectType = gameObjectType;
+            this.imageIcon = pathImageIcon;
     }
 
     @Override
@@ -39,9 +29,18 @@ public abstract class AbstractGameObject implements InterfaceImmovableObject {
         return imageIcon;
     }
 
+
     @Override
     public Coordinate getCoordinate() {
         return coordinate;
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public void setType(GameObjectType gameObjectType) {
+        this.gameObjectType = gameObjectType;
     }
 
     public GameObjectType getType() {

@@ -1,5 +1,7 @@
 package ru.coldman.game.interfaces.map;
 
+import ru.coldman.game.abstracts.AbstractGameMap;
+
 import java.awt.*;
 
 /**
@@ -9,6 +11,9 @@ public interface InterfaceDrawableGameMap {
 
     Component getMap();
 
+    AbstractGameMap getGameMap();
+
     boolean drawMap();
+
 
 }

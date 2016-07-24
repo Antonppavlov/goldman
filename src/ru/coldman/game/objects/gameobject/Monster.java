@@ -1,9 +1,10 @@
-package ru.coldman.game.objects;
+package ru.coldman.game.objects.gameobject;
 
 import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.abstracts.AbstractMovingObject;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
+import ru.coldman.game.objects.Coordinate;
 
 /**
  * Created by Антон on 19.07.2016.
@@ -15,9 +16,9 @@ public class Monster extends AbstractMovingObject {
         super.setIconLeft("/resources/images/monster_left.jpg");
         super.setIconUp("/resources/images/monster_up.jpg");
         super.setIconDown("/resources/images/monster_down.jpg");
-        super.setIcon("/resources/images/monster_up.jpg");
+        super.setIcon(getIconUp());
         super.setCoordinate(coordinate);
-        super.setGameObjectType(GameObjectType.MONSTER);
+        super.setType(GameObjectType.MONSTER);
     }
 
     @Override

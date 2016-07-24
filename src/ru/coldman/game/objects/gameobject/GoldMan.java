@@ -1,9 +1,9 @@
-package ru.coldman.game.objects;
+package ru.coldman.game.objects.gameobject;
 
 import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.abstracts.AbstractMovingObject;
 import ru.coldman.game.enums.GameObjectType;
-import ru.coldman.game.enums.MovingDirection;
+import ru.coldman.game.objects.Coordinate;
 
 /**
  * Created by Антон on 19.07.2016.
@@ -18,14 +18,11 @@ public class GoldMan extends AbstractMovingObject {
         super.setIconLeft("/resources/images/goldman_left.png");
         super.setIconUp("/resources/images/goldman_up.png");
         super.setIconDown("/resources/images/goldman_down.png");
-        super.setIcon("/resources/images/goldman_up.png");
+        super.setIcon(getIconUp());
         super.setCoordinate(coordinate);
-        super.setGameObjectType(GameObjectType.GOLDMAN);
+        super.setType(GameObjectType.GOLDMAN);
     }
 
-    @Override
-    public void move(MovingDirection movingDirection) {
-    }
 
     @Override
     public void getMoveResult(AbstractGameObject objectInNewCoordinate) {

@@ -1,7 +1,7 @@
 package ru.coldman.game.interfaces.object;
 
-import ru.coldman.game.objects.Coordinate;
 import ru.coldman.game.enums.GameObjectType;
+import ru.coldman.game.objects.Coordinate;
 
 import javax.swing.*;
 

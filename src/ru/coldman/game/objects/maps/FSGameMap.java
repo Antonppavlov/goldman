@@ -1,10 +1,11 @@
 package ru.coldman.game.objects.maps;
 
-import ru.coldman.game.objects.Coordinate;
 import ru.coldman.game.abstracts.AbstractGameMap;
 import ru.coldman.game.abstracts.AbstractGameObject;
-import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.creators.GameObjectCreator;
+import ru.coldman.game.enums.GameObjectType;
+import ru.coldman.game.collections.GameCollection;
+import ru.coldman.game.objects.Coordinate;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,6 +21,10 @@ import java.util.logging.Logger;
 public class FSGameMap extends AbstractGameMap {
 
 
+    public FSGameMap(GameCollection gameCollection) {
+        super(gameCollection);
+    }
+
     @Override
     public boolean loadMap(Object source) {
         File file = new File(source.toString());
@@ -30,7 +35,7 @@ public class FSGameMap extends AbstractGameMap {
         try {
             setExitExist(false);
             setGoldManExist(false);
-            
+
             //Устанавливаем высоту
             setHeight(getLineCount(file));
 
@@ -38,7 +43,7 @@ public class FSGameMap extends AbstractGameMap {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 
             // считываем первую строку для определения имени, длины, ширины карты. убираем пробела по краям
-            String strLine = bufferedReader.readLine().trim(); 
+            String strLine = bufferedReader.readLine().trim();
 
             // разбиваем первую строку на токены, разделенные запятой.
             String[] textsInFirstLine = strLine.split(",");
@@ -60,7 +65,7 @@ public class FSGameMap extends AbstractGameMap {
                 //бьём на массив стингов через , и обращаемся к каждой стринге
                 for (String str : strLine.split(",")) {
 
-            //отправляем стирнг и её координаты в метод createGameObject
+                    //отправляем стирнг и её координаты в метод createGameObject
                     createGameObject(str, new Coordinate(x, y));
                     x++;
                 }
@@ -79,6 +84,7 @@ public class FSGameMap extends AbstractGameMap {
         return true;
 
     }
+
     //метод принимает на вход стринг и координаты
     private void createGameObject(String str, Coordinate coordinate) {
 
@@ -88,7 +94,7 @@ public class FSGameMap extends AbstractGameMap {
         //создаём асбтрактый объект передав туда тип объекта используя патерн фабрика объектов
         AbstractGameObject newObj = GameObjectCreator.getInstance().createObject(type, coordinate);
         //добавляем объект в коллекции отпавив в метод addGameObject абстрактного класса AbstractGameMap
-        addGameObject(newObj);
+        getGameCollection().addGameObject(newObj);
 
 
         //если тип объекта EXIT или GOLDMAN меняем значения соотвествующих переменных
@@ -99,6 +105,7 @@ public class FSGameMap extends AbstractGameMap {
         }
 
     }
+
     //метод возвращает количество строчек в файле -1 т.к. первая строка не относится к карте
     private int getLineCount(File file) {
         BufferedReader reader = null;

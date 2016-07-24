@@ -2,13 +2,14 @@ package ru.coldman.game.gui.child.game.maps;
 
 import ru.coldman.game.abstracts.AbstractGameMap;
 import ru.coldman.game.abstracts.AbstractGameObject;
+import ru.coldman.game.creators.MapCreator;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.LocationType;
+import ru.coldman.game.collections.GameCollection;
 import ru.coldman.game.interfaces.map.InterfaceDrawableGameMap;
 import ru.coldman.game.objects.Coordinate;
-import ru.coldman.game.objects.Nothing;
-import ru.coldman.game.objects.Wall;
-import ru.coldman.game.creators.MapCreator;
+import ru.coldman.game.objects.gameobject.Nothing;
+import ru.coldman.game.objects.gameobject.Wall;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,20 +19,22 @@ import java.awt.*;
 /**
  * Created by Антон on 21.07.2016.
  */
-public class JTableGameMap implements InterfaceDrawableGameMap {
+public class JTableGameMap extends JTable implements InterfaceDrawableGameMap {
 
     private JTable jTableMap = new JTable();
 
+    //Создаём абстракрутную игровую карту, откуда необходимо будет скачивать будет выбрано выше
     private AbstractGameMap gameMap;
+    //массив для хранения названия колонок
     private String[] columnNames;
 
     // объекты для отображения на карте будут храниться в двумерном массиве типа AbstractGameObject
     // каждый элемент массива будет обозначаться согласно текстовому представлению объекта как описано в GameObjectType
     private AbstractGameObject[][] mapObjects;
 
-    public JTableGameMap(LocationType type, Object source){
+    public JTableGameMap(LocationType type, Object source, GameCollection gameCollection) {
         jTableMap.setEnabled(false);
-        jTableMap.setSize(new Dimension(300,300));
+        jTableMap.setSize(new Dimension(300, 300));
         jTableMap.setRowHeight(26);
         jTableMap.setRowSelectionAllowed(false);
         jTableMap.setShowHorizontalLines(false);
@@ -40,31 +43,31 @@ public class JTableGameMap implements InterfaceDrawableGameMap {
         jTableMap.setUpdateSelectionOnSort(false);
         jTableMap.setVerifyInputWhenFocusTarget(false);
 
-        gameMap = MapCreator.getInstance().createMap(type);
+        //выбираем из фабрики объектов каким из классов реализации мы будем пользоваться
+        gameMap = MapCreator.getInstance().createMap(type,gameCollection);
+        //передаём откуда загрузить карту
         gameMap.loadMap(source);
 
-        updateObjectsArray();
     }
 
     @Override
     public boolean drawMap() {
+        mapObjects = createGameObjectsArray();
 
         try {
-            // присваиваем пустоту всем заголовкам столбцов, чтобы у таблицы не было заголовоков, а то некрасиво смотрится
             columnNames = new String[gameMap.getWidth()];
-
-
+            // присваиваем пустоту всем заголовкам столбцов, чтобы у таблицы не было заголовоков, а то некрасиво смотрится
             for (int i = 0; i < columnNames.length; i++) {
                 columnNames[i] = "";
             }
-
-
+//TODO УЗКОЕ МЕСТО
             // игровое поле будет отображаться в super без заголовков столбцов
             jTableMap.setModel(new DefaultTableModel(mapObjects, columnNames));
 
 
             // вместо текста в ячейках таблицы устанавливаем отображение картинки
             for (int i = 0; i < jTableMap.getColumnCount(); i++) {
+                //указываем чтобы в каждой ячейке отображался не текст а инонка. для этого передаёстя объект класса ImageRenderer
                 jTableMap.getColumnModel().getColumn(i).setCellRenderer(new ImageRenderer());
                 TableColumn a = jTableMap.getColumnModel().getColumn(i);
                 a.setPreferredWidth(26);
@@ -74,7 +77,6 @@ public class JTableGameMap implements InterfaceDrawableGameMap {
             return false;
         }
 
-
         return true;
     }
 
@@ -82,17 +84,25 @@ public class JTableGameMap implements InterfaceDrawableGameMap {
     public Component getMap() {
         return jTableMap;
     }
+    @Override
+    public AbstractGameMap getGameMap() {
+        return gameMap;
+    }
 
+    private AbstractGameObject[][] createGameObjectsArray() {
 
+        AbstractGameObject[][] mapObjects = new AbstractGameObject[gameMap.getHeight()][gameMap.getWidth()];
 
-    private void updateObjectsArray() {
-
-        mapObjects = new AbstractGameObject[gameMap.getHeight()][gameMap.getWidth()];
-
-        fillEmptyMap(gameMap.getWidth(), gameMap.getHeight());
+        //вначале мы заполняем весь массив пустотой... чтобы если что-то пропустили
+        //то пропущенная область была пустой
+        for (int y = 0; y < gameMap.getHeight(); y++) {
+            for (int x = 0; x < gameMap.getWidth(); x++) {
+                mapObjects[y][x] = new Nothing(new Coordinate(x, y));
+            }
+        }
 
         // потом заполнить массив объектами
-        for (AbstractGameObject gameObj : gameMap.getAllGameObjects()) {
+        for (AbstractGameObject gameObj : gameMap.getGameCollection().getAllGameObjects()) {
             if (!gameObj.getType().equals(GameObjectType.NOTHING)) {// пустоты не добавляем, т.к. они уже добавились когда мы вызвали метод fillEmptyMap()
                 int y = gameObj.getCoordinate().getY();
                 int x = gameObj.getCoordinate().getX();
@@ -105,14 +115,7 @@ public class JTableGameMap implements InterfaceDrawableGameMap {
                 }
             }
         }
-    }
-
-    private void fillEmptyMap(int width, int height) {
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                mapObjects[y][x] = new Nothing(new Coordinate(x, y));
-            }
-        }
+        return mapObjects;
     }
 
 

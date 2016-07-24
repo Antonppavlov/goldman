@@ -1,14 +1,11 @@
 package ru.coldman.game.abstracts;
 
-import ru.coldman.game.objects.Coordinate;
-import ru.coldman.game.enums.GameObjectType;
+import ru.coldman.game.collections.GameCollection;
 import ru.coldman.game.interfaces.map.InterfaceGameMap;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * базовый функционал для заполнения массивов из какого-то источника
@@ -25,28 +22,29 @@ public abstract class AbstractGameMap implements InterfaceGameMap, Serializable 
     private boolean exitExist;
     private boolean goldManExist;
     // хранит все объекты с доступом по координатам
-    private HashMap<Coordinate, AbstractGameObject> gameObjects = new HashMap<>();
     // хранит список объектов для каждого типа
-    private EnumMap<GameObjectType, ArrayList<AbstractGameObject>> typeObjects = new EnumMap<>(GameObjectType.class);
+    private GameCollection gameCollection;
 
-
-    //метод по добавлению объектов
-    public void addGameObject(AbstractGameObject gameObject) {
-        //находим передеваемый тип объекта в коллекции typeObjects
-        // и создаём кололлекцию этих объектов из коллекции typeObjects с названием tmpList
-        ArrayList<AbstractGameObject> tmpList = typeObjects.get(gameObject.getType());
-
-        //если таких объектов там нет то создать коллекцию
-        if (tmpList == null) {
-            tmpList = new ArrayList<>();
-        }
-        //Добавляем этот элемент к коллекции таких же элементов
-        tmpList.add(gameObject);
-        //в коллецию gameObjects передаём  ключ:координаты и объект
-        gameObjects.put(gameObject.getCoordinate(), gameObject);
-        //в коллецию typeObjects передаём ключ: тип объекта и как объект коллекцию объектов
-        typeObjects.put(gameObject.getType(), tmpList);
+    public AbstractGameMap(GameCollection gameCollection){
+        this.gameCollection=gameCollection;
     }
+
+
+    public GameCollection getGameCollection() {
+        if (gameCollection == null)
+            try {
+                throw new Exception("Game collection not initialized!");
+            } catch (Exception ex) {
+                Logger.getLogger(AbstractGameMap.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return gameCollection;
+    }
+
+    public void setGameCollection(GameCollection gameCollection) {
+        this.gameCollection = gameCollection;
+    }
+
+
 
     public AbstractGameObject getPriorityObject(AbstractGameObject firstObject, AbstractGameObject secondObject) {
         // приоритет объекта зависит от номера индекса объекта enum
@@ -54,22 +52,7 @@ public abstract class AbstractGameMap implements InterfaceGameMap, Serializable 
             return firstObject;
         } else return secondObject;
     }
-    public ArrayList<AbstractGameObject> getList(GameObjectType type) {
-        return typeObjects.get(type);
-    }
 
-    public AbstractGameObject getObjectByCoordinate(Coordinate coordinate) {
-        return gameObjects.get(coordinate);
-    }
-
-    public AbstractGameObject getObjectByCoordinate(int x, int y) {
-        return gameObjects.get(new Coordinate(x, y));
-    }
-
-
-    public Collection<AbstractGameObject> getAllGameObjects() {
-        return gameObjects.values();
-    }
 
     public boolean isExitExist() {
         return exitExist;
@@ -126,6 +109,5 @@ public abstract class AbstractGameMap implements InterfaceGameMap, Serializable 
     public boolean isValidMap() {
         return goldManExist && exitExist; // если есть и вход и выход - карта валидна
     }
-
 
 }

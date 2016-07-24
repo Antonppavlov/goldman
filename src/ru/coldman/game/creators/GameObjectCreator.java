@@ -1,10 +1,16 @@
 package ru.coldman.game.creators;
 
 
-import ru.coldman.game.objects.Coordinate;
 import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.enums.GameObjectType;
-import ru.coldman.game.objects.*;
+import ru.coldman.game.objects.Coordinate;
+import ru.coldman.game.objects.gameobject.*;
+
+
+/*
+патернт фабрика объектов для классов имлементтящих AbstractGameObject, в зависимости от
+переданного типа enum GameObjectType будет выбранна реализация
+ */
 
 public class GameObjectCreator {
 

@@ -1,6 +1,8 @@
 package ru.coldman.game.abstracts;
 
+import ru.coldman.game.enums.MovingDirection;
 import ru.coldman.game.interfaces.object.InterfaceMovingObject;
+import ru.coldman.game.objects.Coordinate;
 
 import javax.swing.*;
 
@@ -13,6 +15,39 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
     private ImageIcon iconUp;
     private ImageIcon iconDown;
     private ImageIcon iconRight;
+
+
+    @Override
+    public void move(MovingDirection movingDirection) {
+        int x = getCoordinate().getX();
+        int y = getCoordinate().getY();
+
+        Coordinate newCoordinate = new Coordinate(x, y);
+
+        switch (movingDirection) {
+            case UP: {
+                setIcon(getIconUp());
+                newCoordinate.setXY(x, y - 1);
+                break;
+            }
+            case DOWN: {
+                setIcon(getIconDown());
+                newCoordinate.setXY(x, y + 1);
+                break;
+            }
+            case LEFT: {
+                setIcon(getIconLeft());
+                newCoordinate.setXY(x-1, y);
+                break;
+            }
+            case RIGHT: {
+                setIcon(getIconRight());
+                newCoordinate.setXY(x+1,y);
+                break;
+            }
+        }
+        setCoordinate(newCoordinate);
+    }
 
 
     @Override
@@ -50,4 +85,6 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
     public void setIconRight(String pathImageIcon) {
         this.iconRight = new ImageIcon(getClass().getResource(pathImageIcon));
     }
+
+
 }

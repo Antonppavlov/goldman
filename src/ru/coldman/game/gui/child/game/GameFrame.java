@@ -1,13 +1,18 @@
 package ru.coldman.game.gui.child.game;
 
 
+import ru.coldman.game.abstracts.AbstractGameObject;
+import ru.coldman.game.abstracts.AbstractMovingObject;
+import ru.coldman.game.enums.GameObjectType;
+import ru.coldman.game.enums.MovingDirection;
 import ru.coldman.game.gui.child.BaseChildFrame;
 import ru.coldman.game.gui.main.element.Panel;
 import ru.coldman.game.interfaces.map.InterfaceDrawableGameMap;
-import ru.coldman.game.objects.maps.FSGameMap;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Антон on 16.07.2016.
@@ -38,8 +43,6 @@ public class GameFrame extends BaseChildFrame {
     private JPanel panelGamePanel;
 
 
-    private  FSGameMap fsGameMap;
-
     private InterfaceDrawableGameMap gameMap; // передаем объект карты, которая умеет себя рисовать
 
     public GameFrame() {
@@ -47,7 +50,34 @@ public class GameFrame extends BaseChildFrame {
         createMenuBar();
         createPanelControlGame();
         createFrame();
-        loadGame("src\\resources\\maps\\game.txt");
+        addListener();
+    }
+
+    private void addListener() {
+        btnUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move(MovingDirection.UP,GameObjectType.GOLDMAN);
+            }
+        });
+        btnDown.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move(MovingDirection.DOWN,GameObjectType.GOLDMAN);
+            }
+        });
+        btnLeft.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move(MovingDirection.LEFT,GameObjectType.GOLDMAN);
+            }
+        });
+        btnRight.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move(MovingDirection.RIGHT,GameObjectType.GOLDMAN);
+            }
+        });
     }
 
     private void createGamePlayArea() {
@@ -122,12 +152,6 @@ public class GameFrame extends BaseChildFrame {
     }
 
 
-    private void loadGame(String pathToFile) {
-        fsGameMap=new FSGameMap();
-        fsGameMap.loadMap(pathToFile);
-    }
-
-
     private void createFrame() {
         this.setJMenuBar(menuBar);
         setLayout(new FlowLayout());
@@ -135,11 +159,7 @@ public class GameFrame extends BaseChildFrame {
         getContentPane().add(panelGamePanel);
     }
 
-
-
-
-
-    public void setMap(InterfaceDrawableGameMap gameMap){
+    public void setMap(InterfaceDrawableGameMap gameMap) {
         this.gameMap = gameMap;
         gameMap.drawMap();
 
@@ -147,4 +167,15 @@ public class GameFrame extends BaseChildFrame {
         panelGamePlayArea.add(gameMap.getMap());
     }
 
+
+
+
+    private void move(MovingDirection direction, GameObjectType gameObjectType){
+        AbstractGameObject gameObject = gameMap.getGameMap().getGameCollection().getGameObjects(gameObjectType).get(0);
+
+        if (gameObject instanceof AbstractMovingObject){// дорогостоящая операция
+            ((AbstractMovingObject)gameObject).move(direction);
+            gameMap.drawMap();
+        }
+    }
 }

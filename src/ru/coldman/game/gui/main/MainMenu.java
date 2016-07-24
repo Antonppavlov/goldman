@@ -8,6 +8,7 @@ import ru.coldman.game.gui.child.load.LoadGameFrame;
 import ru.coldman.game.gui.child.statistic.StatisticFrame;
 import ru.coldman.game.gui.main.element.Button;
 import ru.coldman.game.gui.main.element.Panel;
+import ru.coldman.game.collections.MapCollection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +29,7 @@ public class MainMenu extends JFrame {
     private StatisticFrame statisticFrame;
     private LoadGameFrame loadGameFrame;
 
-    private JTableGameMap gameMap = new JTableGameMap(LocationType.FS,"src/resources/maps/game.txt");
+    private JTableGameMap gameMap = new JTableGameMap(LocationType.FS, "src/resources/maps/game.txt",new MapCollection());
 
     public MainMenu() {
         this.btnNewGame = new Button("New game");
@@ -58,7 +59,7 @@ public class MainMenu extends JFrame {
 
         getContentPane().add(panel);
 
-        setPreferredSize(new Dimension(270,250));
+        setPreferredSize(new Dimension(270, 250));
         pack();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
