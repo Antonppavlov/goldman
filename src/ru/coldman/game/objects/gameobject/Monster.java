@@ -12,22 +12,31 @@ import ru.coldman.game.objects.Coordinate;
 public class Monster extends AbstractMovingObject {
 
     public Monster(Coordinate coordinate) {
-        super.setIconRight("/resources/images/monster_right.jpg");
-        super.setIconLeft("/resources/images/monster_left.jpg");
-        super.setIconUp("/resources/images/monster_up.jpg");
-        super.setIconDown("/resources/images/monster_down.jpg");
-        super.setIcon(getIconUp());
-        super.setCoordinate(coordinate);
         super.setType(GameObjectType.MONSTER);
+        super.setCoordinate(coordinate);
+
+        super.setIcon(getImageIcon("/resources/images/monster_up.jpg"));// иконку по-умолчанию (можно сделать реализацию случайного выбора иконки)
+
     }
 
     @Override
-    public void move(MovingDirection movingDirection) {
-
+    public void changeIcon(MovingDirection direction) {
+        switch (direction) {
+            case DOWN:
+                super.setIcon(getImageIcon("/resources/images/monster_down.jpg"));
+                break;
+            case LEFT:
+                super.setIcon(getImageIcon("/resources/images/monster_right.jpg"));
+                break;
+            case RIGHT:
+                super.setIcon(getImageIcon("/resources/images/monster_right.jpg"));
+                break;
+            case UP:
+                super.setIcon(getImageIcon("/resources/images/monster_up.jpg"));
+                break;
+        }
     }
 
-    @Override
-    public void getMoveResult(AbstractGameObject objectInNewCoordinate) {
 
-    }
+
 }

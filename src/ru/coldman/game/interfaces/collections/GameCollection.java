@@ -1,11 +1,11 @@
-package ru.coldman.game.collections;
+package ru.coldman.game.interfaces.collections;
 
 import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.objects.Coordinate;
 import java.util.List;
 
-public interface GameCollection{
+public interface  GameCollection{
     
     AbstractGameObject getObjectByCoordinate(Coordinate coordinate);
     

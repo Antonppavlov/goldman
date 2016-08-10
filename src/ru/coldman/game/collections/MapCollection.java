@@ -3,6 +3,7 @@ package ru.coldman.game.collections;
 
 import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.enums.GameObjectType;
+import ru.coldman.game.interfaces.collections.GameCollection;
 import ru.coldman.game.objects.Coordinate;
 
 import java.util.ArrayList;

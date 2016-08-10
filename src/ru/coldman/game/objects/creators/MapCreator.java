@@ -1,9 +1,9 @@
-package ru.coldman.game.creators;
+package ru.coldman.game.objects.creators;
 
 
 import ru.coldman.game.abstracts.AbstractGameMap;
 import ru.coldman.game.enums.LocationType;
-import ru.coldman.game.collections.GameCollection;
+import ru.coldman.game.interfaces.collections.GameCollection;
 import ru.coldman.game.objects.maps.FSGameMap;
 
 /*

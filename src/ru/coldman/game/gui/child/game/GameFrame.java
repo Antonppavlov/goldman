@@ -7,7 +7,7 @@ import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
 import ru.coldman.game.gui.child.BaseChildFrame;
 import ru.coldman.game.gui.main.element.Panel;
-import ru.coldman.game.interfaces.map.InterfaceDrawableGameMap;
+import ru.coldman.game.interfaces.map.IDrawableGameMap;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +43,7 @@ public class GameFrame extends BaseChildFrame {
     private JPanel panelGamePanel;
 
 
-    private InterfaceDrawableGameMap gameMap; // передаем объект карты, которая умеет себя рисовать
+    private IDrawableGameMap gameMap; // передаем объект карты, которая умеет себя рисовать
 
     public GameFrame() {
         createGamePlayArea();
@@ -159,7 +159,7 @@ public class GameFrame extends BaseChildFrame {
         getContentPane().add(panelGamePanel);
     }
 
-    public void setMap(InterfaceDrawableGameMap gameMap) {
+    public void setMap(IDrawableGameMap gameMap) {
         this.gameMap = gameMap;
         gameMap.drawMap();
 
@@ -170,12 +170,9 @@ public class GameFrame extends BaseChildFrame {
 
 
 
-    private void move(MovingDirection direction, GameObjectType gameObjectType){
-        AbstractGameObject gameObject = gameMap.getGameMap().getGameCollection().getGameObjects(gameObjectType).get(0);
-
-        if (gameObject instanceof AbstractMovingObject){// дорогостоящая операция
-            ((AbstractMovingObject)gameObject).move(direction);
-            gameMap.drawMap();
-        }
+    private void move(MovingDirection movingDirection, GameObjectType gameObjectType) {
+        gameMap.getGameMap().move(movingDirection, gameObjectType);
+        gameMap.drawMap();
     }
-}
+    }
+

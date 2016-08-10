@@ -1,15 +1,16 @@
 package ru.coldman.game.gui.child.game.maps;
 
 import ru.coldman.game.abstracts.AbstractGameMap;
+
 import ru.coldman.game.abstracts.AbstractGameObject;
-import ru.coldman.game.creators.MapCreator;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.LocationType;
-import ru.coldman.game.collections.GameCollection;
-import ru.coldman.game.interfaces.map.InterfaceDrawableGameMap;
+import ru.coldman.game.interfaces.collections.GameCollection;
+import ru.coldman.game.interfaces.map.IDrawableGameMap;
 import ru.coldman.game.objects.Coordinate;
 import ru.coldman.game.objects.gameobject.Nothing;
 import ru.coldman.game.objects.gameobject.Wall;
+import ru.coldman.game.objects.creators.MapCreator;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +20,7 @@ import java.awt.*;
 /**
  * Created by Антон on 21.07.2016.
  */
-public class JTableGameMap extends JTable implements InterfaceDrawableGameMap {
+public class JTableGameMap extends JTable implements IDrawableGameMap {
 
     private JTable jTableMap = new JTable();
 
@@ -44,7 +45,7 @@ public class JTableGameMap extends JTable implements InterfaceDrawableGameMap {
         jTableMap.setVerifyInputWhenFocusTarget(false);
 
         //выбираем из фабрики объектов каким из классов реализации мы будем пользоваться
-        gameMap = MapCreator.getInstance().createMap(type,gameCollection);
+        gameMap =  MapCreator.getInstance().createMap(type,gameCollection);
         //передаём откуда загрузить карту
         gameMap.loadMap(source);
 

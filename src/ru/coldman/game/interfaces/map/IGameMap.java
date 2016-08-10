@@ -3,7 +3,7 @@ package ru.coldman.game.interfaces.map;
 /**
  * интерфейс для загрузки\сохранения карты
  */
-public interface InterfaceGameMap {
+public interface IGameMap {
 
     int getHeight();
 

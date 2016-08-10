@@ -18,8 +18,7 @@ public class ImageRenderer extends DefaultTableCellRenderer {
         lbl.setText(null);
 
         //переопределяем внешний вид отображения в ячейке
-        AbstractGameObject value1 = (AbstractGameObject) value;
-        lbl.setIcon(value1.getImageIcon());
+        lbl.setIcon(((AbstractGameObject) value).getIcon());
 
         return lbl;
     }

@@ -1,7 +1,9 @@
 package ru.coldman.game.abstracts;
 
-import ru.coldman.game.collections.GameCollection;
-import ru.coldman.game.interfaces.map.InterfaceGameMap;
+import ru.coldman.game.enums.GameObjectType;
+import ru.coldman.game.enums.MovingDirection;
+import ru.coldman.game.interfaces.collections.GameCollection;
+import ru.coldman.game.interfaces.map.IGameMap;
 
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -12,7 +14,7 @@ import java.util.logging.Logger;
  * далее из этих массивов будет заполнена карта
  */
 // Serializable нужен для сериализации (сохранения) объекта карты, чтобы можно было сохранять игру и восстанавливать
-public abstract class AbstractGameMap implements InterfaceGameMap, Serializable {
+public abstract class AbstractGameMap implements IGameMap, Serializable {
 
     private static final long serialVersionUID = 1L;
     private int width;
@@ -21,38 +23,14 @@ public abstract class AbstractGameMap implements InterfaceGameMap, Serializable 
     private String name;
     private boolean exitExist;
     private boolean goldManExist;
-    // хранит все объекты с доступом по координатам
-    // хранит список объектов для каждого типа
     private GameCollection gameCollection;
 
-    public AbstractGameMap(GameCollection gameCollection){
-        this.gameCollection=gameCollection;
+    public AbstractGameMap() {
     }
 
-
-    public GameCollection getGameCollection() {
-        if (gameCollection == null)
-            try {
-                throw new Exception("Game collection not initialized!");
-            } catch (Exception ex) {
-                Logger.getLogger(AbstractGameMap.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        return gameCollection;
-    }
-
-    public void setGameCollection(GameCollection gameCollection) {
+    public AbstractGameMap(GameCollection gameCollection) {
         this.gameCollection = gameCollection;
     }
-
-
-
-    public AbstractGameObject getPriorityObject(AbstractGameObject firstObject, AbstractGameObject secondObject) {
-        // приоритет объекта зависит от номера индекса объекта enum
-        if (firstObject.getType().getIndexPriority() > secondObject.getType().getIndexPriority()) {
-            return firstObject;
-        } else return secondObject;
-    }
-
 
     public boolean isExitExist() {
         return exitExist;
@@ -105,9 +83,37 @@ public abstract class AbstractGameMap implements InterfaceGameMap, Serializable 
         this.timeLimit = timeLimit;
     }
 
+    public AbstractGameObject getPriorityObject(AbstractGameObject firstObject, AbstractGameObject secondObject) {
+        // приоритет объекта зависит от номера индекса объекта enum
+        return (firstObject.getType().getIndexPriority() > secondObject.getType().getIndexPriority()) ? firstObject : secondObject; // сокращенная запись условия if: если первый объект имеет больший приоритет - вернуть его, иначе вернуть второй объект
+    }
 
     public boolean isValidMap() {
         return goldManExist && exitExist; // если есть и вход и выход - карта валидна
     }
 
+    public GameCollection getGameCollection() {
+        if (gameCollection == null) {
+            try {
+                throw new Exception("Game collection not initialized!");
+            } catch (Exception ex) {
+                Logger.getLogger(AbstractGameMap.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return gameCollection;
+    }
+
+    public void setGameCollection(GameCollection gameCollection) {
+        this.gameCollection = gameCollection;
+    }
+
+    public void move(MovingDirection direction, GameObjectType gameObjectType) {
+
+        for (AbstractGameObject gameObject : getGameCollection().getGameObjects(gameObjectType)) {
+            if (gameObject instanceof AbstractMovingObject) {// дорогостоящая операция - instanceof
+                AbstractMovingObject movingObject = (AbstractMovingObject) gameObject;
+                movingObject.move(direction, this);
+            }
+        }
+    }
 }

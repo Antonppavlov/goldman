@@ -1,4 +1,4 @@
-package ru.coldman.game.creators;
+package ru.coldman.game.objects.creators;
 
 
 import ru.coldman.game.abstracts.AbstractGameObject;

@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * Интерфейс для отрисовки карты
  */
-public interface InterfaceDrawableGameMap {
+public interface IDrawableGameMap {
 
     Component getMap();
 

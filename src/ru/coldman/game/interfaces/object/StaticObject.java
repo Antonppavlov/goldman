@@ -8,11 +8,14 @@ import javax.swing.*;
 /**
  * Интерфейс для не движемых объектов
  */
-public interface InterfaceImmovableObject {
-    ImageIcon getImageIcon();
+public interface StaticObject {
+    // объект должен иметь иконку
+    ImageIcon getIcon();
 
+    // координаты
     Coordinate getCoordinate();
 
+    // тип объекта
     GameObjectType getType();
 
 }

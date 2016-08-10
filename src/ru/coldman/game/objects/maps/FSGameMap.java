@@ -2,9 +2,9 @@ package ru.coldman.game.objects.maps;
 
 import ru.coldman.game.abstracts.AbstractGameMap;
 import ru.coldman.game.abstracts.AbstractGameObject;
-import ru.coldman.game.creators.GameObjectCreator;
+import ru.coldman.game.objects.creators.GameObjectCreator;
 import ru.coldman.game.enums.GameObjectType;
-import ru.coldman.game.collections.GameCollection;
+import ru.coldman.game.interfaces.collections.GameCollection;
 import ru.coldman.game.objects.Coordinate;
 
 import java.io.BufferedReader;

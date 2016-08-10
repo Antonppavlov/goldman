@@ -1,89 +1,117 @@
 package ru.coldman.game.abstracts;
 
 import ru.coldman.game.enums.MovingDirection;
-import ru.coldman.game.interfaces.object.InterfaceMovingObject;
+import ru.coldman.game.interfaces.object.GameObjectMoveListener;
+import ru.coldman.game.interfaces.object.IMovingObject;
+import ru.coldman.game.interfaces.object.MoveListener;
 import ru.coldman.game.objects.Coordinate;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Класс движемых игровых объектов. наследуется от класса не движемых игрвых объектов и имплементит интерфейс движемых объектов
+ * класс, который отвечает за любой движущийся объект. наследуется от класса
+ * AbstractGameObject с добавлением функций движения
  */
-public abstract class AbstractMovingObject extends AbstractGameObject implements InterfaceMovingObject {
+public abstract class AbstractMovingObject extends AbstractGameObject implements IMovingObject, MoveListener {
 
-    private ImageIcon iconLeft;
-    private ImageIcon iconUp;
-    private ImageIcon iconDown;
-    private ImageIcon iconRight;
-
+    public abstract void changeIcon(MovingDirection direction);
+    private int step = 1;// по-умолчанию у всех объектов шаг равен 1
 
     @Override
-    public void move(MovingDirection movingDirection) {
-        int x = getCoordinate().getX();
-        int y = getCoordinate().getY();
+    public int getStep() {
+        return step;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
+    }
+
+
+    //метод отвечает за перемещение объекта в карте
+    @Override
+    //в метое передаёться напраление движения и абстратная карта
+    public void move(MovingDirection direction, AbstractGameMap gameMap) {
+
+        Coordinate newCoordinate = getNewCoordinate(direction);
+
+
+
+        AbstractGameObject objectInNewCoordinate = gameMap.getGameCollection().getObjectByCoordinate(newCoordinate);
+
+        switch (objectInNewCoordinate.getType()) {
+
+            case NOTHING: {
+                changeIcon(direction);
+                setCoordinate(newCoordinate);
+                 notifyListeners(this, objectInNewCoordinate);
+            }
+
+            default: {
+            }
+
+        }
+
+    }
+
+
+    public Coordinate getNewCoordinate(MovingDirection direction) {
+
+        // берем текущие координаты объекта, которые нужно передвинуть (индексы начинаются с нуля)
+        int x = this.getCoordinate().getX();
+        int y = this.getCoordinate().getY();
+
 
         Coordinate newCoordinate = new Coordinate(x, y);
 
-        switch (movingDirection) {
+
+        switch (direction) {// определяем, в каком направлении нужно двигаться по массиву
             case UP: {
-                setIcon(getIconUp());
-                newCoordinate.setXY(x, y - 1);
+                newCoordinate.setY(y - step);
                 break;
             }
             case DOWN: {
-                setIcon(getIconDown());
-                newCoordinate.setXY(x, y + 1);
+                newCoordinate.setY(y + step);
                 break;
             }
             case LEFT: {
-                setIcon(getIconLeft());
-                newCoordinate.setXY(x-1, y);
+                newCoordinate.setX(x - step);
                 break;
             }
             case RIGHT: {
-                setIcon(getIconRight());
-                newCoordinate.setXY(x+1,y);
+                newCoordinate.setX(x + step);
                 break;
             }
         }
-        setCoordinate(newCoordinate);
-    }
 
+        return newCoordinate;
+    }
+    private ArrayList<GameObjectMoveListener> listeners = new ArrayList<>();
 
     @Override
-    public ImageIcon getIconLeft() {
-        return iconLeft;
-    }
-
-    public void setIconLeft(String pathImageIcon) {
-        this.iconLeft = new ImageIcon(getClass().getResource(pathImageIcon));
+    public List<GameObjectMoveListener> getListeners() {
+        return listeners;
     }
 
     @Override
-    public ImageIcon getIconUp() {
-        return iconUp;
-    }
-
-    public void setIconUp(String pathImageIcon) {
-        this.iconUp = new ImageIcon(getClass().getResource(pathImageIcon));
+    public void addListener(GameObjectMoveListener listener) {
+        listeners.add(listener);
     }
 
     @Override
-    public ImageIcon getIconDown() {
-        return iconDown;
-    }
-
-    public void setIconDown(String pathImageIcon) {
-        this.iconDown = new ImageIcon(getClass().getResource(pathImageIcon));
+    public void removeListener(GameObjectMoveListener listener) {
+        listeners.remove(listener);
     }
 
     @Override
-    public ImageIcon getIconRight() {
-        return iconRight;
+    public void removeAllListeners() {
+        listeners.clear();
     }
 
-    public void setIconRight(String pathImageIcon) {
-        this.iconRight = new ImageIcon(getClass().getResource(pathImageIcon));
+    @Override
+    public void notifyListeners(AbstractGameObject obj1, AbstractGameObject obj2) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 

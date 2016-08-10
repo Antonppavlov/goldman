@@ -1,34 +1,47 @@
 package ru.coldman.game.abstracts;
 
 import ru.coldman.game.enums.GameObjectType;
-import ru.coldman.game.interfaces.object.InterfaceImmovableObject;
+import ru.coldman.game.interfaces.object.StaticObject;
 import ru.coldman.game.objects.Coordinate;
 
 import javax.swing.*;
+import java.util.Objects;
 
 /**
  * Абстрактый класс который импрелементит интерфейс не движемых игровых объектов
  */
-public abstract class AbstractGameObject implements InterfaceImmovableObject {
+public abstract class AbstractGameObject implements StaticObject {
 
-
-    private GameObjectType gameObjectType;// все объекты будут иметь тип
+    private GameObjectType type;// все объекты будут иметь тип
     private Coordinate coordinate;// все объекты будут иметь координаты положения
 
-    private ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/images/noicon.png"));
+    private ImageIcon icon = getImageIcon("/resources/images/noicon.png");// изображение по-умолчанию
 
-    public void setIcon(ImageIcon pathImageIcon) {
-        if (pathImageIcon == null) {
-            imageIcon = null;
-        } else
-            this.imageIcon = pathImageIcon;
+    protected AbstractGameObject() {// частый вопрос - нужен ли public конструктор в абстрактном классе
+    }
+
+    public void setIcon(ImageIcon currentIcon) {
+        this.icon = currentIcon;
     }
 
     @Override
-    public ImageIcon getImageIcon() {
-        return imageIcon;
+    public ImageIcon getIcon() {
+        return icon;
     }
 
+
+    protected ImageIcon getImageIcon(String path){
+        return new ImageIcon(getClass().getResource(path));
+    }
+
+    @Override
+    public GameObjectType getType() {
+        return type;
+    }
+
+    public void setType(GameObjectType type) {
+        this.type = type;
+    }
 
     @Override
     public Coordinate getCoordinate() {
@@ -39,33 +52,32 @@ public abstract class AbstractGameObject implements InterfaceImmovableObject {
         this.coordinate = coordinate;
     }
 
-    public void setType(GameObjectType gameObjectType) {
-        this.gameObjectType = gameObjectType;
-    }
-
-    public GameObjectType getType() {
-        return gameObjectType;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        AbstractGameObject that = (AbstractGameObject) o;
-
-        if (imageIcon != null ? !imageIcon.equals(that.imageIcon) : that.imageIcon != null) return false;
-        if (coordinate != null ? !coordinate.equals(that.coordinate) : that.coordinate != null) return false;
-        return gameObjectType == that.gameObjectType;
-
-    }
-
     @Override
     public int hashCode() {
-        int result = imageIcon != null ? imageIcon.hashCode() : 0;
-        result = 31 * result + (coordinate != null ? coordinate.hashCode() : 0);
-        result = 31 * result + (gameObjectType != null ? gameObjectType.hashCode() : 0);
-        return result;
+        int hash = 7;
+        hash = 37 * hash + (this.type != null ? this.type.hashCode() : 0);
+        hash = 37 * hash + Objects.hashCode(this.coordinate);
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AbstractGameObject other = (AbstractGameObject) obj;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+
+
+
 }
