@@ -19,9 +19,9 @@ import java.awt.*;
 public class JTableGameMap implements DrawableMap {
 
     private JTable jTableMap = new JTable();
-    
+
     private AbstractGameMap gameMap;
-    
+
     private String[] columnNames;
     // объекты для отображения на карте будут храниться в двумерном массиве типа AbstractGameObject
     // каждый элемент массива будет обозначаться согласно текстовому представлению объекта как описано в GameObjectType
@@ -40,12 +40,11 @@ public class JTableGameMap implements DrawableMap {
 
         gameMap = MapCreator.getInstance().createMap(type, gameCollection);
         gameMap.loadMap(source);
-     
-        
+
+
     }
 
 
-   
     private void fillEmptyMap(int width, int height) {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
@@ -54,7 +53,7 @@ public class JTableGameMap implements DrawableMap {
         }
     }
 
-  
+
     private void updateObjectsArray() {
 
         mapObjects = new AbstractGameObject[gameMap.getHeight()][gameMap.getWidth()];
@@ -79,7 +78,7 @@ public class JTableGameMap implements DrawableMap {
 
     @Override
     public boolean drawMap() {
-        
+
         updateObjectsArray();
 
         try {
@@ -108,7 +107,7 @@ public class JTableGameMap implements DrawableMap {
 
 
         return true;
-    }    
+    }
 
     @Override
     public Component getMapComponent() {

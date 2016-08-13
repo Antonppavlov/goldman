@@ -107,6 +107,6 @@ public abstract class AbstractGameMap implements GameMap, Serializable { // Seri
 
     public void move(MovingDirection direction, GameObjectType gameObjectType) {
         getGameCollection().moveObject(direction, gameObjectType);
-   
+
     }
 }

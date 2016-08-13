@@ -55,25 +55,25 @@ public class GameFrame extends BaseChildFrame {
         btnUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                move(MovingDirection.UP,GameObjectType.GOLDMAN);
+                move(MovingDirection.UP, GameObjectType.GOLDMAN);
             }
         });
         btnDown.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                move(MovingDirection.DOWN,GameObjectType.GOLDMAN);
+                move(MovingDirection.DOWN, GameObjectType.GOLDMAN);
             }
         });
         btnLeft.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                move(MovingDirection.LEFT,GameObjectType.GOLDMAN);
+                move(MovingDirection.LEFT, GameObjectType.GOLDMAN);
             }
         });
         btnRight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                move(MovingDirection.RIGHT,GameObjectType.GOLDMAN);
+                move(MovingDirection.RIGHT, GameObjectType.GOLDMAN);
             }
         });
     }
@@ -166,11 +166,9 @@ public class GameFrame extends BaseChildFrame {
     }
 
 
-
-
     private void move(MovingDirection movingDirection, GameObjectType gameObjectType) {
         gameMap.getGameMap().move(movingDirection, gameObjectType);
         gameMap.drawMap();
     }
-    }
+}
 

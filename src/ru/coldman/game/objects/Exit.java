@@ -2,7 +2,6 @@ package ru.coldman.game.objects;
 
 import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.enums.GameObjectType;
-import ru.coldman.game.enums.GameObjectType;
 
 /**
  * объект EXIT

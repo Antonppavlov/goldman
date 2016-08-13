@@ -32,7 +32,7 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
     }
 
     @Override
-    public ActionResult  moveToObject(MovingDirection direction, AbstractGameObject gameObject) {
+    public ActionResult moveToObject(MovingDirection direction, AbstractGameObject gameObject) {
         //отрисовка действия
         actionBeforeMove(direction);
         //результат действия

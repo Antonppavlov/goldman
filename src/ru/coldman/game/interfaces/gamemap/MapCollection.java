@@ -80,7 +80,7 @@ public class MapCollection implements GameCollection {// объекты для �
                     case MOVE: {
                         swapObjects(movingObject, objectInNewCoordinate);
                         break;
-                    }                
+                    }
                 }
 
 
@@ -96,6 +96,7 @@ public class MapCollection implements GameCollection {// объекты для �
         gameObjects.put(obj2.getCoordinate(), obj2);
 
     }
+
     //метод меняет ссылки на объекты "координаты" местами
     private void swapCoordinates(AbstractGameObject obj1, AbstractGameObject obj2) {
         Coordinate tmpCoordinate = obj1.getCoordinate();

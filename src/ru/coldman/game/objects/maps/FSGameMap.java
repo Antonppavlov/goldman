@@ -15,8 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FSGameMap extends AbstractGameMap {
-    
-    public FSGameMap(){   
+
+    public FSGameMap() {
         super();
     }
 

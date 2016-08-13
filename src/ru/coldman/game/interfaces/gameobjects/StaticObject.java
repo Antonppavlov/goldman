@@ -10,11 +10,10 @@ import ru.coldman.game.objects.Coordinate;
 import javax.swing.*;
 
 /**
- *
  * @author Tim
  */
 public interface StaticObject {
- 
+
     // объект должен иметь иконку
     ImageIcon getIcon();
 
@@ -23,6 +22,6 @@ public interface StaticObject {
 
     // тип объекта
     GameObjectType getType();
-    
-            
+
+
 }

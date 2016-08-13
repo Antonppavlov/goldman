@@ -1,7 +1,6 @@
 package ru.coldman.game.gui.child.game.maps;
 
 import ru.coldman.game.abstracts.AbstractGameMap;
-
 import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.LocationType;
@@ -45,7 +44,7 @@ public class JTableGameMap extends JTable implements DrawableMap {
         jTableMap.setVerifyInputWhenFocusTarget(false);
 
         //выбираем из фабрики объектов каким из классов реализации мы будем пользоваться
-        gameMap =  MapCreator.getInstance().createMap(type,gameCollection);
+        gameMap = MapCreator.getInstance().createMap(type, gameCollection);
         //передаём откуда загрузить карту
         gameMap.loadMap(source);
 
@@ -85,6 +84,7 @@ public class JTableGameMap extends JTable implements DrawableMap {
     public Component getMapComponent() {
         return jTableMap;
     }
+
     @Override
     public AbstractGameMap getGameMap() {
         return gameMap;

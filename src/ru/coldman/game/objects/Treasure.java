@@ -14,8 +14,8 @@ public class Treasure extends AbstractGameObject {
         super.setCoordinate(coordinate);
         super.setIcon(getImageIcon("/resources/images/gold.png"));
     }
-    
-    
+
+
     private int score = 5;// каждое сокровище будет давать 5 очков игроку
 
     public int getScore() {

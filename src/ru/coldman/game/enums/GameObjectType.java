@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * типы объектов, которые участвуют в игре (которые будут рисоваться на карте)
  */
-public enum GameObjectType implements Serializable{
+public enum GameObjectType implements Serializable {
 
     MONSTER(5),
     TREASURE(4),
@@ -21,11 +21,11 @@ public enum GameObjectType implements Serializable{
     private GameObjectType(int indexPriority) {
         this.indexPriority = indexPriority;
     }
-    
+
     private int indexPriority;// индекс для приоритета показа на карте, если несколько объектов окажется в одном квадрате
 
     public int getIndexPriority() {
         return indexPriority;
     }
-    
+
 }

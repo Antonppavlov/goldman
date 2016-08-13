@@ -7,16 +7,16 @@ import ru.coldman.game.objects.Coordinate;
 
 import java.util.List;
 
-public interface GameCollection{
-    
+public interface GameCollection {
+
     AbstractGameObject getObjectByCoordinate(Coordinate coordinate);
-    
+
     AbstractGameObject getObjectByCoordinate(int x, int y);
-    
+
     void addGameObject(AbstractGameObject gameObject);
-    
+
     List<AbstractGameObject> getAllGameObjects();
-    
+
     List<AbstractGameObject> getGameObjects(GameObjectType type);
 
 

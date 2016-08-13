@@ -25,7 +25,7 @@ public class MapCreator {
                 break;
             }
             case DB: {
-                
+
                 break;
             }
             default:

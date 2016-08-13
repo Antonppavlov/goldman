@@ -52,5 +52,5 @@ public class GoldMan extends AbstractMovingObject {
         }
     }
 
- 
+
 }

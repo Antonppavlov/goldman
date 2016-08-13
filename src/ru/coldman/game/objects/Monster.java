@@ -35,7 +35,5 @@ public class Monster extends AbstractMovingObject {
         }
     }
 
- 
-
 
 }
