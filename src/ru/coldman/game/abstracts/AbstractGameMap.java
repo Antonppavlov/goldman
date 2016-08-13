@@ -3,18 +3,16 @@ package ru.coldman.game.abstracts;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
 import ru.coldman.game.interfaces.collections.GameCollection;
-import ru.coldman.game.interfaces.map.IGameMap;
+import ru.coldman.game.interfaces.gamemap.GameMap;
 
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * базовый функционал для заполнения массивов из какого-то источника
- * далее из этих массивов будет заполнена карта
+ * базовая карта без конкретного отображения
  */
-// Serializable нужен для сериализации (сохранения) объекта карты, чтобы можно было сохранять игру и восстанавливать
-public abstract class AbstractGameMap implements IGameMap, Serializable {
+public abstract class AbstractGameMap implements GameMap, Serializable { // Serializable нужен для сериализации (сохранения) объекта карты, чтобы можно было сохранять игру и восстанавливать
 
     private static final long serialVersionUID = 1L;
     private int width;
@@ -108,12 +106,7 @@ public abstract class AbstractGameMap implements IGameMap, Serializable {
     }
 
     public void move(MovingDirection direction, GameObjectType gameObjectType) {
-
-        for (AbstractGameObject gameObject : getGameCollection().getGameObjects(gameObjectType)) {
-            if (gameObject instanceof AbstractMovingObject) {// дорогостоящая операция - instanceof
-                AbstractMovingObject movingObject = (AbstractMovingObject) gameObject;
-                movingObject.move(direction, this);
-            }
-        }
+        getGameCollection().moveObject(direction, gameObjectType);
+   
     }
 }

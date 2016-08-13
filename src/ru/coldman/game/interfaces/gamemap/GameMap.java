@@ -1,9 +1,9 @@
-package ru.coldman.game.interfaces.map;
+package ru.coldman.game.interfaces.gamemap;
 
 /**
- * интерфейс для загрузки\сохранения карты
+ * интерфейс для игровой карты
  */
-public interface IGameMap {
+public interface GameMap {
 
     int getHeight();
 
@@ -14,6 +14,4 @@ public interface IGameMap {
     boolean loadMap(Object source);
 
     boolean saveMap(Object source);
-
-
 }

@@ -1,15 +1,9 @@
 package ru.coldman.game.objects.creators;
 
-
 import ru.coldman.game.abstracts.AbstractGameMap;
 import ru.coldman.game.enums.LocationType;
 import ru.coldman.game.interfaces.collections.GameCollection;
 import ru.coldman.game.objects.maps.FSGameMap;
-
-/*
-патернт фабрика объектов для классов имлементтящих AbstractGameMap, в зависимости от
-переданного типа enum LocationType будет выбранна реализация
- */
 
 public class MapCreator {
 
@@ -22,16 +16,16 @@ public class MapCreator {
         return instance;
     }
 
-    public AbstractGameMap createMap(LocationType type, GameCollection gameCollection) {
+    public AbstractGameMap createMap(LocationType type, GameCollection collection) {
         AbstractGameMap obj = null;
 
         switch (type) {
             case FS: {
-                obj = new FSGameMap(gameCollection);
+                obj = new FSGameMap(collection);
                 break;
             }
             case DB: {
-
+                
                 break;
             }
             default:

@@ -1,20 +1,22 @@
 package ru.coldman.game.abstracts;
 
+
 import ru.coldman.game.enums.GameObjectType;
-import ru.coldman.game.interfaces.object.StaticObject;
+import ru.coldman.game.interfaces.gameobjects.StaticObject;
 import ru.coldman.game.objects.Coordinate;
 
 import javax.swing.*;
 import java.util.Objects;
 
 /**
- * Абстрактый класс который импрелементит интерфейс не движемых игровых объектов
+ * класс, который отвечает за любой объект, созданный в игре. задает все общие
+ * характеристики объектов в игре
  */
 public abstract class AbstractGameObject implements StaticObject {
-
+    
     private GameObjectType type;// все объекты будут иметь тип
     private Coordinate coordinate;// все объекты будут иметь координаты положения
-
+    
     private ImageIcon icon = getImageIcon("/resources/images/noicon.png");// изображение по-умолчанию
 
     protected AbstractGameObject() {// частый вопрос - нужен ли public конструктор в абстрактном классе
@@ -29,11 +31,11 @@ public abstract class AbstractGameObject implements StaticObject {
         return icon;
     }
 
-
+    
     protected ImageIcon getImageIcon(String path){
         return new ImageIcon(getClass().getResource(path));
     }
-
+    
     @Override
     public GameObjectType getType() {
         return type;
@@ -76,8 +78,8 @@ public abstract class AbstractGameObject implements StaticObject {
     public String toString() {
         return super.toString();
     }
+    
+    
 
-
-
-
+   
 }

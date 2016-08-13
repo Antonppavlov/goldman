@@ -1,7 +1,10 @@
+/**
+ *
+ */
 package ru.coldman.game.enums;
 
 /**
- * Created by Антон on 19.07.2016.
+ * направления, по которым могут двигаться объекты
  */
 public enum MovingDirection {
 
@@ -10,5 +13,4 @@ public enum MovingDirection {
     LEFT,
     RIGHT,
     WAIT // на месте
-
 }

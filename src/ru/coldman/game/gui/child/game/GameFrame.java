@@ -1,13 +1,11 @@
 package ru.coldman.game.gui.child.game;
 
 
-import ru.coldman.game.abstracts.AbstractGameObject;
-import ru.coldman.game.abstracts.AbstractMovingObject;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
 import ru.coldman.game.gui.child.BaseChildFrame;
 import ru.coldman.game.gui.main.element.Panel;
-import ru.coldman.game.interfaces.map.IDrawableGameMap;
+import ru.coldman.game.interfaces.gamemap.DrawableMap;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +41,7 @@ public class GameFrame extends BaseChildFrame {
     private JPanel panelGamePanel;
 
 
-    private IDrawableGameMap gameMap; // передаем объект карты, которая умеет себя рисовать
+    private DrawableMap gameMap; // передаем объект карты, которая умеет себя рисовать
 
     public GameFrame() {
         createGamePlayArea();
@@ -159,12 +157,12 @@ public class GameFrame extends BaseChildFrame {
         getContentPane().add(panelGamePanel);
     }
 
-    public void setMap(IDrawableGameMap gameMap) {
+    public void setMap(DrawableMap gameMap) {
         this.gameMap = gameMap;
         gameMap.drawMap();
 
         panelGamePlayArea.removeAll();
-        panelGamePlayArea.add(gameMap.getMap());
+        panelGamePlayArea.add(gameMap.getMapComponent());
     }
 
 

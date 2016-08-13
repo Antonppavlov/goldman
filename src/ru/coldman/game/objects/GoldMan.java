@@ -1,13 +1,11 @@
-package ru.coldman.game.objects.gameobject;
+package ru.coldman.game.objects;
 
-import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.abstracts.AbstractMovingObject;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
-import ru.coldman.game.objects.Coordinate;
 
 /**
- * Created by Антон on 19.07.2016.
+ * класс отвечает за работу объекта GOLDMAN - главный персонаж игры
  */
 public class GoldMan extends AbstractMovingObject {
 
@@ -53,13 +51,6 @@ public class GoldMan extends AbstractMovingObject {
                 break;
         }
     }
-    // super.setIconRight("/resources/images/goldman_right.png");
-    // super.setIconLeft("/resources/images/goldman_left.png");
-    // super.setIconUp("/resources/images/goldman_up.png");
-    // super.setIconDown("/resources/images/goldman_down.png");
 
-
-
-
+ 
 }
-

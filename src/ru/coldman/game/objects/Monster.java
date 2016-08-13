@@ -1,13 +1,11 @@
-package ru.coldman.game.objects.gameobject;
+package ru.coldman.game.objects;
 
-import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.abstracts.AbstractMovingObject;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
-import ru.coldman.game.objects.Coordinate;
 
 /**
- * Created by Антон on 19.07.2016.
+ * класс отвечает за работу объекта MONSTER
  */
 public class Monster extends AbstractMovingObject {
 
@@ -37,6 +35,7 @@ public class Monster extends AbstractMovingObject {
         }
     }
 
+ 
 
 
 }
