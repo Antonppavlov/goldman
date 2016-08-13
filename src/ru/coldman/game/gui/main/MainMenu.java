@@ -8,7 +8,7 @@ import ru.coldman.game.gui.child.load.LoadGameFrame;
 import ru.coldman.game.gui.child.statistic.StatisticFrame;
 import ru.coldman.game.gui.main.element.Button;
 import ru.coldman.game.gui.main.element.Panel;
-import ru.coldman.game.interfaces.gamemap.MapCollection;
+import ru.coldman.game.objects.maps.MapCollection;
 
 import javax.swing.*;
 import java.awt.*;

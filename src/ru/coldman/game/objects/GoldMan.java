@@ -1,6 +1,8 @@
 package ru.coldman.game.objects;
 
+import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.abstracts.AbstractMovingObject;
+import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
 
@@ -52,5 +54,14 @@ public class GoldMan extends AbstractMovingObject {
         }
     }
 
+    @Override
+    public ActionResult doAction(AbstractGameObject gameObject) {
+        switch (gameObject.getType()){
+            case MONSTER:{
+                return ActionResult.DIE;
+            }
+        }
 
+        return super.doAction(gameObject);
+    }
 }

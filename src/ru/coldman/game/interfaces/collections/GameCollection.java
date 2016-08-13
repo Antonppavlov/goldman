@@ -1,6 +1,7 @@
 package ru.coldman.game.interfaces.collections;
 
 import ru.coldman.game.abstracts.AbstractGameObject;
+import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
 import ru.coldman.game.objects.Coordinate;
@@ -23,6 +24,6 @@ public interface GameCollection {
 //В этот метот передаётся направление движения, и тип объекта который будет двигаться
     //вызывается для того чтобы обработать движение объекта
 
-    void moveObject(MovingDirection direction, GameObjectType gameObjectType);
+    ActionResult moveObject(MovingDirection direction, GameObjectType gameObjectType);
 
 }

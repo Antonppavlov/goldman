@@ -90,7 +90,7 @@ public abstract class AbstractGameMap implements GameMap, Serializable { // Seri
         return goldManExist && exitExist; // если есть и вход и выход - карта валидна
     }
 
-    public GameCollection getGameCollection() {
+public GameCollection getGameCollection() {
         if (gameCollection == null) {
             try {
                 throw new Exception("Game collection not initialized!");

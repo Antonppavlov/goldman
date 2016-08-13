@@ -1,4 +1,4 @@
-package ru.coldman.game.interfaces.gamemap;
+package ru.coldman.game.objects.maps;
 
 import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.abstracts.AbstractMovingObject;
@@ -55,8 +55,8 @@ public class MapCollection implements GameCollection {// объекты для �
     }
 
     @Override
-    public void moveObject(MovingDirection direction, GameObjectType gameObjectType) {
-
+    public ActionResult moveObject(MovingDirection direction, GameObjectType gameObjectType) {
+        ActionResult actionResult=null;
         //цикл для всех объектов этого типа в EnumMap GameObjects
         for (AbstractGameObject gameObject : this.getGameObjects(gameObjectType)) {
             //если этот объект наследуется от абстрактного класса AbstractMovingObject то
@@ -71,7 +71,7 @@ public class MapCollection implements GameCollection {// объекты для �
                 //получение результата движение параметром из енума ActionResult
                 //для этого в объекте movingObject.вызываю метот moveToObject и передаю в него направление и коориданыты объекта который находится на координатам
                 //направление передаётся для смены картинки
-                ActionResult actionResult = movingObject.moveToObject(direction, objectInNewCoordinate);
+                actionResult = movingObject.moveToObject(direction, objectInNewCoordinate);
 
                 //свич по результатм
                 switch (actionResult) {
@@ -82,10 +82,9 @@ public class MapCollection implements GameCollection {// объекты для �
                         break;
                     }
                 }
-
-
             }
         }
+        return actionResult;
     }
 
     private void swapObjects(AbstractGameObject obj1, AbstractGameObject obj2) {
