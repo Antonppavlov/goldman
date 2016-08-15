@@ -2,14 +2,17 @@ package ru.coldman.game.objects.gui.maps;
 
 import ru.coldman.game.abstracts.AbstractGameMap;
 import ru.coldman.game.abstracts.AbstractGameObject;
+import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.LocationType;
 import ru.coldman.game.interfaces.collections.GameCollection;
 import ru.coldman.game.interfaces.gamemap.DrawableMap;
 import ru.coldman.game.objects.Coordinate;
+import ru.coldman.game.objects.GoldMan;
 import ru.coldman.game.objects.Nothing;
 import ru.coldman.game.objects.Wall;
 import ru.coldman.game.objects.creators.MapCreator;
+import ru.coldman.game.objects.listeners.MoveResultListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +21,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class JTableGameMap implements DrawableMap {
+public class JTableGameMap implements DrawableMap, MoveResultListener {
 
     private JTable jTableMap = new JTable();
     private AbstractGameMap gameMap;
@@ -119,8 +122,21 @@ public class JTableGameMap implements DrawableMap {
     }
 
 
-
     private TimeMover timeMover = new TimeMover();
+
+    @Override
+    public void notifyActionResult(ActionResult actionResult, GoldMan goldMan) {
+
+        switch (actionResult) {
+            case DIE: {
+                timeMover.stop();
+                break;
+            }
+
+        }
+
+    }
+
 
     private class TimeMover implements ActionListener {
 
