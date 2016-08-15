@@ -7,6 +7,7 @@ import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.LocationType;
 import ru.coldman.game.interfaces.collections.GameCollection;
 import ru.coldman.game.interfaces.gamemap.DrawableMap;
+import ru.coldman.game.movestrategies.AgressiveMoving;
 import ru.coldman.game.objects.Coordinate;
 import ru.coldman.game.objects.GoldMan;
 import ru.coldman.game.objects.Nothing;
@@ -148,8 +149,7 @@ public class JTableGameMap implements DrawableMap {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
-            gameMap.getGameCollection().moveObjectRandom(GameObjectType.MONSTER);
+            gameMap.getGameCollection().moveObject(new AgressiveMoving(), GameObjectType.MONSTER);
         }
 
 

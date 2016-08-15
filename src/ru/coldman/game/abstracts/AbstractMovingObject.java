@@ -3,6 +3,7 @@ package ru.coldman.game.abstracts;
 import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.enums.MovingDirection;
 import ru.coldman.game.interfaces.gameobjects.MovingObject;
+import ru.coldman.game.objects.Coordinate;
 
 /**
  * класс, который отвечает за любой движущийся объект. наследуется от класса
@@ -48,12 +49,51 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
         // то вернуть NO_ACTION т.е не делать действия
 //свич с типом объекта
         switch (gameObject.getType()) {
-// если впереди пустота вернуть MOVE
+
             case NOTHING: {
                 return ActionResult.MOVE;
             }
+
+            case WALL: {// по-умолчанию объект не может ходить через стену
+                return ActionResult.NO_ACTION;
+            }
         }
-//если ничего из перечисленного то ничего не делать
+
         return ActionResult.NO_ACTION;
+    }
+
+
+    public Coordinate getDirectionCoordinate(MovingDirection direction) {
+
+        // берем текущие координаты объекта, которые нужно передвинуть (индексы начинаются с нуля)
+        int x = this.getCoordinate().getX();
+        int y = this.getCoordinate().getY();
+
+
+        Coordinate newCoordinate = new Coordinate(x, y);
+
+
+        switch (direction) {// определяем, в каком направлении нужно двигаться
+            case UP: {
+                newCoordinate.setY(y - this.getStep());
+                break;
+            }
+            case DOWN: {
+                newCoordinate.setY(y + this.getStep());
+                break;
+            }
+            case LEFT: {
+                newCoordinate.setX(x - this.getStep());
+                break;
+            }
+            case RIGHT: {
+                newCoordinate.setX(x + this.getStep());
+                break;
+            }
+        }
+
+        return newCoordinate;
+
+
     }
 }

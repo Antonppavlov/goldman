@@ -69,6 +69,9 @@ public class GoldMan extends AbstractMovingObject {
             case MONSTER:  {
                 return ActionResult.DIE;
             }
+            case EXIT:{
+                return ActionResult.WIN;
+            }
 
         }
 

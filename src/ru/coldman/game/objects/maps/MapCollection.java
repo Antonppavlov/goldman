@@ -5,6 +5,7 @@ import ru.coldman.game.abstracts.AbstractMovingObject;
 import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
+import ru.coldman.game.movestrategies.MoveStrategy;
 import ru.coldman.game.objects.Coordinate;
 import ru.coldman.game.objects.GoldMan;
 import ru.coldman.game.objects.Nothing;
@@ -54,8 +55,20 @@ public class MapCollection extends MapListenersRegistrator {// объекты д
 
     }
 
+
     @Override
     public void moveObject(MovingDirection direction, GameObjectType gameObjectType) {
+        doMoveAction(direction, gameObjectType, null);// движение по направлению (без стратегии)
+    }
+
+
+    @Override
+    public void moveObject(MoveStrategy moveStrategy, GameObjectType gameObjectType) {
+        doMoveAction(null, gameObjectType, moveStrategy);// движение по стратегии
+    }
+
+
+    private void doMoveAction(MovingDirection direction, GameObjectType gameObjectType, MoveStrategy moveStrategy) {
 
         GoldMan goldMan = (GoldMan) getGameObjects(GameObjectType.GOLDMAN).get(0);
 
@@ -68,9 +81,11 @@ public class MapCollection extends MapListenersRegistrator {// объекты д
                 //привести его к AbstractMovingObject, сделать ссылку movingObject и сослаться на этот объект
                 AbstractMovingObject movingObject = (AbstractMovingObject) gameObject;
 
-                if (direction == null) {
-                    direction = getRandomMoveDirection(movingObject);
+
+                if (moveStrategy!=null){// если указана стратегия движения - то берем наравления оттуда
+                    direction = moveStrategy.getDirection(movingObject, goldMan, this);
                 }
+
 
 
                 //получить новую кординату отравив в метод getNewCoordinate направление и объект
@@ -154,73 +169,6 @@ public class MapCollection extends MapListenersRegistrator {// объекты д
         return newCoordinate;
     }
 
-    private MovingDirection getRandomMoveDirection(AbstractMovingObject movingObject) {
-
-        GoldMan goldMan = (GoldMan) getGameObjects(GameObjectType.GOLDMAN).get(0);
-
-        MovingDirection direction = null;
-
-        int characterX = goldMan.getCoordinate().getX();
-        int characterY = goldMan.getCoordinate().getY();
-
-        int monsterX = movingObject.getCoordinate().getX();
-        int monsterY = movingObject.getCoordinate().getY();
-
-        int number = getRandomInt(2);// 50% шанс чтобы двинуться к игроку
-        // может сгенерить 1 или 0. это и будет 50% шанса
-       // if (number == 1) { // 0 - двигаться по направлению к игроку
-            // наугад берется любое направление к игроку
-            number = getRandomInt(2);
-            switch (number) {// двигаться по оси X в сторону игрока или по оси Y
-                case 1: {
-                    if (monsterX > characterX) {
-                        direction = MovingDirection.LEFT;
-                    } else {
-                        direction = MovingDirection.RIGHT;
-                    }
-                    break;
-                }
-                case 2: {
-                    if (monsterY > characterY) {
-                        direction = MovingDirection.UP;
-                    } else {
-                        direction = MovingDirection.DOWN;
-                    }
-                    break;
-                }
-
-            }
-      //  } else { // 1 - двигаться по направлению от игрока
-      //      number = getRandomInt(2);
-      //      switch (number) {// двигаться по оси X от игрока или по оси Y
-      //          case 1: {
-      //              if (monsterX > characterX) {
-      //                  direction = MovingDirection.RIGHT;
-      //              } else {
-      //                  direction = MovingDirection.LEFT;
-      //              }
-      //              break;
-      //          }
-      //          case 2: {
-      //              if (monsterY > characterY) {
-      //                  direction = MovingDirection.DOWN;
-      //              } else {
-      //                  direction = MovingDirection.UP;
-      //              }
-      //              break;
-      //          }
-      //      }
-      //  }
-
-
-        return direction;
-    }
-
-    private int getRandomInt(int i) {
-        Random r = new Random();
-        return r.nextInt(i) + 1;
-    }
-
     @Override
     public void notifyMoveListeners(ActionResult actionResult, GoldMan goldMan) {
         for (MoveResultListener listener : getMoveListeners()) {
@@ -228,10 +176,10 @@ public class MapCollection extends MapListenersRegistrator {// объекты д
         }
     }
 
-    @Override
-    public void moveObjectRandom(GameObjectType objectType) {
-        moveObject(null, objectType);
-    }
+ //  @Override
+ //  public void moveObjectRandom(GameObjectType objectType) {
+ //      doMoveAction(null, objectType);
+ //  }
 }
 
 

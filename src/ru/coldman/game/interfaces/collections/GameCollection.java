@@ -3,6 +3,7 @@ package ru.coldman.game.interfaces.collections;
 import ru.coldman.game.abstracts.AbstractGameObject;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
+import ru.coldman.game.movestrategies.MoveStrategy;
 import ru.coldman.game.objects.Coordinate;
 import ru.coldman.game.objects.listeners.MoveResultNotifier;
 
@@ -26,7 +27,6 @@ public interface GameCollection extends MoveResultNotifier {
 
     void moveObject(MovingDirection direction, GameObjectType gameObjectType);
 
-    //метод рандоменого перемещение для монстров
-    void moveObjectRandom(GameObjectType objectType);
+    void moveObject(MoveStrategy moveStrategy, GameObjectType gameObjectType);
 
 }

@@ -59,25 +59,25 @@ public class GameFrame extends BaseChildFrame implements MoveResultListener {
         btnUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                move(MovingDirection.UP, GameObjectType.GOLDMAN);
+                moveObject(MovingDirection.UP, GameObjectType.GOLDMAN);
             }
         });
         btnDown.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                move(MovingDirection.DOWN, GameObjectType.GOLDMAN);
+                moveObject(MovingDirection.DOWN, GameObjectType.GOLDMAN);
             }
         });
         btnLeft.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                move(MovingDirection.LEFT, GameObjectType.GOLDMAN);
+                moveObject(MovingDirection.LEFT, GameObjectType.GOLDMAN);
             }
         });
         btnRight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                move(MovingDirection.RIGHT, GameObjectType.GOLDMAN);
+                moveObject(MovingDirection.RIGHT, GameObjectType.GOLDMAN);
             }
         });
     }
@@ -172,9 +172,8 @@ public class GameFrame extends BaseChildFrame implements MoveResultListener {
     }
 
 
-    private void move(MovingDirection movingDirection, GameObjectType gameObjectType) {
+    private void moveObject(MovingDirection movingDirection, GameObjectType gameObjectType) {
         gameMap.getGameMap().getGameCollection().moveObject(movingDirection, gameObjectType);
-
     }
 
     @Override
@@ -196,20 +195,30 @@ public class GameFrame extends BaseChildFrame implements MoveResultListener {
                 break;
             }
 
-
             case COLLECT_TREASURE: {
-                textScore.setText(String.valueOf(goldMan.getTotalScore()));
+                textScore.setText(String.valueOf(goldMan.getTotalScore()*2));
+                break;
+            }
+            case WIN:{
+                win();
                 break;
             }
         }
+
+
 
         gameMap.drawMap();
 
     }
 
 
+    private void win(){
+        MessageManager.showInformMessage(this, "Вы выграли!\nКоличество очков: "+textScore.getText());
+        closeFrame();
+    }
+
     private void gameOver() {
-        MessageManager.showInformMessage(null, "Вы проиграли!");
+        MessageManager.showInformMessage(this, "Вы проиграли!");
         closeFrame();
     }
 
