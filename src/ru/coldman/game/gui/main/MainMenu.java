@@ -29,7 +29,7 @@ public class MainMenu extends JFrame {
     private StatisticFrame statisticFrame;
     private LoadGameFrame loadGameFrame;
 
-    private JTableGameMap gameMap = new JTableGameMap(LocationType.FS, "src/resources/maps/game.txt", new MapCollection());
+    private JTableGameMap gameMap;
 
     public MainMenu() {
         this.btnNewGame = new Button("New game");
@@ -111,6 +111,7 @@ public class MainMenu extends JFrame {
     }
 
     private void btnNewGame() {
+        gameMap = new JTableGameMap(LocationType.FS, "src/resources/maps/game.txt", new MapCollection());
         gameFrame = new GameFrame();
         gameFrame.setMap(gameMap);
         gameFrame.showFrame(this);

@@ -36,6 +36,9 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
         //отрисовка действия
         actionBeforeMove(direction);
         //результат действия
+        if (gameObject == null) { // край карты
+            return ActionResult.NO_ACTION;
+        }
         return doAction(gameObject);
     }
 
@@ -43,9 +46,6 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
     public ActionResult doAction(AbstractGameObject gameObject) {
 //если gameObject == null   происходит если край карты
         // то вернуть NO_ACTION т.е не делать действия
-        if (gameObject == null) { // край карты
-            return ActionResult.NO_ACTION;
-        }
 //свич с типом объекта
         switch (gameObject.getType()) {
 // если впереди пустота вернуть MOVE

@@ -168,7 +168,7 @@ public class MapCollection extends MapListenersRegistrator {// объекты д
 
         int number = getRandomInt(2);// 50% шанс чтобы двинуться к игроку
         // может сгенерить 1 или 0. это и будет 50% шанса
-        if (number == 1) { // 0 - двигаться по направлению к игроку
+       // if (number == 1) { // 0 - двигаться по направлению к игроку
             // наугад берется любое направление к игроку
             number = getRandomInt(2);
             switch (number) {// двигаться по оси X в сторону игрока или по оси Y
@@ -190,27 +190,27 @@ public class MapCollection extends MapListenersRegistrator {// объекты д
                 }
 
             }
-        } else { // 1 - двигаться по направлению от игрока
-            number = getRandomInt(2);
-            switch (number) {// двигаться по оси X от игрока или по оси Y
-                case 1: {
-                    if (monsterX > characterX) {
-                        direction = MovingDirection.RIGHT;
-                    } else {
-                        direction = MovingDirection.LEFT;
-                    }
-                    break;
-                }
-                case 2: {
-                    if (monsterY > characterY) {
-                        direction = MovingDirection.DOWN;
-                    } else {
-                        direction = MovingDirection.UP;
-                    }
-                    break;
-                }
-            }
-        }
+      //  } else { // 1 - двигаться по направлению от игрока
+      //      number = getRandomInt(2);
+      //      switch (number) {// двигаться по оси X от игрока или по оси Y
+      //          case 1: {
+      //              if (monsterX > characterX) {
+      //                  direction = MovingDirection.RIGHT;
+      //              } else {
+      //                  direction = MovingDirection.LEFT;
+      //              }
+      //              break;
+      //          }
+      //          case 2: {
+      //              if (monsterY > characterY) {
+      //                  direction = MovingDirection.DOWN;
+      //              } else {
+      //                  direction = MovingDirection.UP;
+      //              }
+      //              break;
+      //          }
+      //      }
+      //  }
 
 
         return direction;

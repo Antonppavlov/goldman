@@ -45,6 +45,7 @@ public class Monster extends AbstractMovingObject {
 
 
             case TREASURE:
+            case EXIT:
             case MONSTER: { // монстр не может наступать на сокровище и на других монстров
                 return ActionResult.NO_ACTION;
             }
