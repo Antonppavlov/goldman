@@ -43,7 +43,7 @@ public class JTableGameMap implements DrawableMap {
 
         gameMap = MapCreator.getInstance().createMap(type, gameCollection);
         gameMap.loadMap(source);
-
+        timeMover = new TimeMover();
 
     }
 
@@ -122,7 +122,7 @@ public class JTableGameMap implements DrawableMap {
     }
 
 
-    private TimeMover timeMover = new TimeMover();
+    private TimeMover timeMover;
 
 
     private class TimeMover implements ActionListener, MoveResultListener {
@@ -135,6 +135,7 @@ public class JTableGameMap implements DrawableMap {
             timer = new Timer(MOVING_PAUSE, this);
             timer.setInitialDelay(INIT_PAUSE);
             timer.start();
+            gameMap.getGameCollection().addMoveListener(this);
         }
 
         public void start() {
@@ -147,6 +148,7 @@ public class JTableGameMap implements DrawableMap {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
             gameMap.getGameCollection().moveObjectRandom(GameObjectType.MONSTER);
         }
 
