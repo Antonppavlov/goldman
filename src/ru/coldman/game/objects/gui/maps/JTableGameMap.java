@@ -21,7 +21,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class JTableGameMap implements DrawableMap, MoveResultListener {
+public class JTableGameMap implements DrawableMap {
 
     private JTable jTableMap = new JTable();
     private AbstractGameMap gameMap;
@@ -124,21 +124,8 @@ public class JTableGameMap implements DrawableMap, MoveResultListener {
 
     private TimeMover timeMover = new TimeMover();
 
-    @Override
-    public void notifyActionResult(ActionResult actionResult, GoldMan goldMan) {
 
-        switch (actionResult) {
-            case DIE: {
-                timeMover.stop();
-                break;
-            }
-
-        }
-
-    }
-
-
-    private class TimeMover implements ActionListener {
+    private class TimeMover implements ActionListener, MoveResultListener {
 
         private Timer timer;
         private final static int MOVING_PAUSE = 500;
@@ -161,6 +148,17 @@ public class JTableGameMap implements DrawableMap, MoveResultListener {
         public void actionPerformed(ActionEvent e) {
             gameMap.getGameCollection().moveObjectRandom(GameObjectType.MONSTER);
         }
-    }
 
+
+        @Override
+        public void notifyActionResult(ActionResult actionResult, GoldMan goldMan) {
+
+            switch (actionResult) {
+                case DIE: case WIN:{
+                    timer.stop();
+                    break;
+                }
+            }
+        }
+    }
 }
