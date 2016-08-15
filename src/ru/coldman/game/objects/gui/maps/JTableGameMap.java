@@ -129,10 +129,11 @@ public class JTableGameMap implements DrawableMap {
 
         private Timer timer;
         private final static int MOVING_PAUSE = 500;
+        private final static int INIT_PAUSE = 1000;
 
         private TimeMover() {
             timer = new Timer(MOVING_PAUSE, this);
-            timer.setInitialDelay(0);
+            timer.setInitialDelay(INIT_PAUSE);
             timer.start();
         }
 
