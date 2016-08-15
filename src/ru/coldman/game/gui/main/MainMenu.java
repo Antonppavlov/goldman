@@ -3,11 +3,11 @@ package ru.coldman.game.gui.main;
 
 import ru.coldman.game.enums.LocationType;
 import ru.coldman.game.gui.child.game.GameFrame;
-import ru.coldman.game.gui.child.game.maps.JTableGameMap;
 import ru.coldman.game.gui.child.load.LoadGameFrame;
 import ru.coldman.game.gui.child.statistic.StatisticFrame;
 import ru.coldman.game.gui.main.element.Button;
 import ru.coldman.game.gui.main.element.Panel;
+import ru.coldman.game.objects.gui.maps.JTableGameMap;
 import ru.coldman.game.objects.maps.MapCollection;
 
 import javax.swing.*;

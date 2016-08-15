@@ -5,15 +5,15 @@ import ru.coldman.game.abstracts.AbstractMovingObject;
 import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
-import ru.coldman.game.interfaces.collections.GameCollection;
 import ru.coldman.game.objects.Coordinate;
+import ru.coldman.game.objects.GoldMan;
+import ru.coldman.game.objects.Nothing;
+import ru.coldman.game.objects.listeners.MapListenersRegistrator;
+import ru.coldman.game.objects.listeners.MoveResultListener;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-public class MapCollection implements GameCollection {// объекты для карты, которые умеют уведомлять всех слушателей о своих ходах
+public class MapCollection extends MapListenersRegistrator {// объекты для карты, которые умеют уведомлять всех слушателей о своих ходах
 
     private HashMap<Coordinate, AbstractGameObject> gameObjects = new HashMap<>();// хранит все объекты с доступом по координатам
     private EnumMap<GameObjectType, ArrayList<AbstractGameObject>> typeObjects = new EnumMap<>(GameObjectType.class); // хранит список объектов для каждого типа    
@@ -55,8 +55,11 @@ public class MapCollection implements GameCollection {// объекты для �
     }
 
     @Override
-    public ActionResult moveObject(MovingDirection direction, GameObjectType gameObjectType) {
-        ActionResult actionResult=null;
+    public void moveObject(MovingDirection direction, GameObjectType gameObjectType) {
+
+        GoldMan goldMan = (GoldMan) getGameObjects(GameObjectType.GOLDMAN).get(0);
+
+        ActionResult actionResult = null;
         //цикл для всех объектов этого типа в EnumMap GameObjects
         for (AbstractGameObject gameObject : this.getGameObjects(gameObjectType)) {
             //если этот объект наследуется от абстрактного класса AbstractMovingObject то
@@ -64,6 +67,12 @@ public class MapCollection implements GameCollection {// объекты для �
 
                 //привести его к AbstractMovingObject, сделать ссылку movingObject и сослаться на этот объект
                 AbstractMovingObject movingObject = (AbstractMovingObject) gameObject;
+
+                if (direction == null) {
+                    direction = getRandomMoveDirection(movingObject);
+                }
+
+
                 //получить новую кординату отравив в метод getNewCoordinate направление и объект
                 Coordinate newCoordinate = getNewCoordinate(direction, movingObject);
                 //сделать ссылку на объект хранящийся в этой координате
@@ -75,16 +84,26 @@ public class MapCollection implements GameCollection {// объекты для �
 
                 //свич по результатм
                 switch (actionResult) {
-                    //если результатом является движение то перадть два объета в метод swapObjects
-                    //который поменяет их местами
                     case MOVE: {
                         swapObjects(movingObject, objectInNewCoordinate);
                         break;
                     }
+                    case COLLECT_TREASURE: {
+                        swapObjects(movingObject, new Nothing(newCoordinate));
+                        break;
+                    }
+
+                    case WIN:
+                    case DIE: {
+                        break;
+                    }
+
                 }
+
             }
+
+            notifyMoveListeners(actionResult, goldMan);
         }
-        return actionResult;
     }
 
     private void swapObjects(AbstractGameObject obj1, AbstractGameObject obj2) {
@@ -134,4 +153,85 @@ public class MapCollection implements GameCollection {// объекты для �
 
         return newCoordinate;
     }
+
+    private MovingDirection getRandomMoveDirection(AbstractMovingObject movingObject) {
+
+        GoldMan goldMan = (GoldMan) getGameObjects(GameObjectType.GOLDMAN).get(0);
+
+        MovingDirection direction = null;
+
+        int characterX = goldMan.getCoordinate().getX();
+        int characterY = goldMan.getCoordinate().getY();
+
+        int monsterX = movingObject.getCoordinate().getX();
+        int monsterY = movingObject.getCoordinate().getY();
+
+        int number = getRandomInt(2);// 50% шанс чтобы двинуться к игроку
+        // может сгенерить 1 или 0. это и будет 50% шанса
+        if (number == 1) { // 0 - двигаться по направлению к игроку
+            // наугад берется любое направление к игроку
+            number = getRandomInt(2);
+            switch (number) {// двигаться по оси X в сторону игрока или по оси Y
+                case 1: {
+                    if (monsterX > characterX) {
+                        direction = MovingDirection.LEFT;
+                    } else {
+                        direction = MovingDirection.RIGHT;
+                    }
+                    break;
+                }
+                case 2: {
+                    if (monsterY > characterY) {
+                        direction = MovingDirection.UP;
+                    } else {
+                        direction = MovingDirection.DOWN;
+                    }
+                    break;
+                }
+
+            }
+        } else { // 1 - двигаться по направлению от игрока
+            number = getRandomInt(2);
+            switch (number) {// двигаться по оси X от игрока или по оси Y
+                case 1: {
+                    if (monsterX > characterX) {
+                        direction = MovingDirection.RIGHT;
+                    } else {
+                        direction = MovingDirection.LEFT;
+                    }
+                    break;
+                }
+                case 2: {
+                    if (monsterY > characterY) {
+                        direction = MovingDirection.DOWN;
+                    } else {
+                        direction = MovingDirection.UP;
+                    }
+                    break;
+                }
+            }
+        }
+
+
+        return direction;
+    }
+
+    private int getRandomInt(int i) {
+        Random r = new Random();
+        return r.nextInt(i) + 1;
+    }
+
+    @Override
+    public void notifyMoveListeners(ActionResult actionResult, GoldMan goldMan) {
+        for (MoveResultListener listener : getMoveListeners()) {
+            listener.notifyActionResult(actionResult, goldMan);
+        }
+    }
+
+    @Override
+    public void moveObjectRandom(GameObjectType objectType) {
+        moveObject(null, objectType);
+    }
 }
+
+

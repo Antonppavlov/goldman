@@ -1,11 +1,15 @@
 package ru.coldman.game.gui.child.game;
 
 
+import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
 import ru.coldman.game.gui.child.BaseChildFrame;
 import ru.coldman.game.gui.main.element.Panel;
 import ru.coldman.game.interfaces.gamemap.DrawableMap;
+import ru.coldman.game.objects.GoldMan;
+import ru.coldman.game.objects.listeners.MoveResultListener;
+import ru.coldman.game.utils.MessageManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +19,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Антон on 16.07.2016.
  */
-public class GameFrame extends BaseChildFrame {
+public class GameFrame extends BaseChildFrame implements MoveResultListener {
 
     private JMenu menuFile;
     private JMenuItem menuItemSave;
@@ -161,14 +165,53 @@ public class GameFrame extends BaseChildFrame {
         this.gameMap = gameMap;
         gameMap.drawMap();
 
+        gameMap.getGameMap().getGameCollection().addMoveListener(this);
+        textTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit()));
         panelGamePlayArea.removeAll();
         panelGamePlayArea.add(gameMap.getMapComponent());
     }
 
 
     private void move(MovingDirection movingDirection, GameObjectType gameObjectType) {
-        gameMap.getGameMap().move(movingDirection, gameObjectType);
-        gameMap.drawMap();
+        gameMap.getGameMap().getGameCollection().moveObject(movingDirection, gameObjectType);
+
     }
+
+    @Override
+    public void notifyActionResult(ActionResult actionResult, GoldMan goldMan) {
+
+        switch (actionResult) {
+            case MOVE: {
+                textTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit() - goldMan.getTurnsNumber()));
+
+                if (goldMan.getTurnsNumber() >= gameMap.getGameMap().getTimeLimit()) {
+                    gameOver();
+                }
+
+                break;
+            }
+
+            case DIE: {
+                gameOver();
+                break;
+            }
+
+
+            case COLLECT_TREASURE: {
+                textScore.setText(String.valueOf(goldMan.getTotalScore()));
+                break;
+            }
+        }
+
+        gameMap.drawMap();
+
+    }
+
+
+    private void gameOver() {
+        MessageManager.showInformMessage(null, "Вы проиграли!");
+        closeFrame();
+    }
+
 }
 

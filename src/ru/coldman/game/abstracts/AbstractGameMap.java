@@ -1,7 +1,5 @@
 package ru.coldman.game.abstracts;
 
-import ru.coldman.game.enums.GameObjectType;
-import ru.coldman.game.enums.MovingDirection;
 import ru.coldman.game.interfaces.collections.GameCollection;
 import ru.coldman.game.interfaces.gamemap.GameMap;
 
@@ -90,7 +88,7 @@ public abstract class AbstractGameMap implements GameMap, Serializable { // Seri
         return goldManExist && exitExist; // если есть и вход и выход - карта валидна
     }
 
-public GameCollection getGameCollection() {
+    public GameCollection getGameCollection() {
         if (gameCollection == null) {
             try {
                 throw new Exception("Game collection not initialized!");
@@ -105,8 +103,4 @@ public GameCollection getGameCollection() {
         this.gameCollection = gameCollection;
     }
 
-    public void move(MovingDirection direction, GameObjectType gameObjectType) {
-        getGameCollection().moveObject(direction, gameObjectType);
-
-    }
 }

@@ -1,14 +1,14 @@
 package ru.coldman.game.interfaces.collections;
 
 import ru.coldman.game.abstracts.AbstractGameObject;
-import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
 import ru.coldman.game.objects.Coordinate;
+import ru.coldman.game.objects.listeners.MoveResultNotifier;
 
 import java.util.List;
 
-public interface GameCollection {
+public interface GameCollection extends MoveResultNotifier {
 
     AbstractGameObject getObjectByCoordinate(Coordinate coordinate);
 
@@ -21,9 +21,12 @@ public interface GameCollection {
     List<AbstractGameObject> getGameObjects(GameObjectType type);
 
 
-//В этот метот передаётся направление движения, и тип объекта который будет двигаться
+    //В этот метот передаётся направление движения, и тип объекта который будет двигаться
     //вызывается для того чтобы обработать движение объекта
 
-    ActionResult moveObject(MovingDirection direction, GameObjectType gameObjectType);
+    void moveObject(MovingDirection direction, GameObjectType gameObjectType);
+
+    //метод рандоменого перемещение для монстров
+    void moveObjectRandom(GameObjectType objectType);
 
 }
