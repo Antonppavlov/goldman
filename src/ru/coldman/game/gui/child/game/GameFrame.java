@@ -1,6 +1,7 @@
 package ru.coldman.game.gui.child.game;
 
 
+import ru.coldman.game.abstracts.AbstractMovingObject;
 import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
@@ -177,7 +178,9 @@ public class GameFrame extends BaseChildFrame implements MoveResultListener {
     }
 
     @Override
-    public void notifyActionResult(ActionResult actionResult, GoldMan goldMan) {
+    public void notifyActionResult(ActionResult actionResult, final AbstractMovingObject abstractMovingObject) {
+
+        GoldMan goldMan = (GoldMan) gameMap.getGameMap().getGameCollection().getGameObjects(GameObjectType.GOLDMAN).get(0);
 
         switch (actionResult) {
             case MOVE: {
@@ -196,7 +199,7 @@ public class GameFrame extends BaseChildFrame implements MoveResultListener {
             }
 
             case COLLECT_TREASURE: {
-                textScore.setText(String.valueOf(goldMan.getTotalScore()*2));
+                textScore.setText(String.valueOf(goldMan.getTotalScore()));
                 break;
             }
             case WIN:{
@@ -213,7 +216,7 @@ public class GameFrame extends BaseChildFrame implements MoveResultListener {
 
 
     private void win(){
-        MessageManager.showInformMessage(this, "Вы выграли!\nКоличество очков: "+textScore.getText());
+        MessageManager.showInformMessage(this, "Вы выграли!\nКоличество очков: "+Integer.valueOf(textScore.getText())*2);
         closeFrame();
     }
 

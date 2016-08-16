@@ -5,11 +5,13 @@ import ru.coldman.game.abstracts.AbstractMovingObject;
 import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.MovingDirection;
+import ru.coldman.game.objects.sound.SoundObject;
+import ru.coldman.game.objects.sound.WavPlayer;
 
 /**
  * класс отвечает за работу объекта MONSTER
  */
-public class Monster extends AbstractMovingObject {
+public class Monster extends AbstractMovingObject implements SoundObject {
 
     public Monster(Coordinate coordinate) {
         super.setType(GameObjectType.MONSTER);
@@ -57,5 +59,14 @@ public class Monster extends AbstractMovingObject {
         }
 
         return super.doAction(gameObject);
+    }
+
+    @Override
+    public String getSoundName(ActionResult actionResult) {
+        switch (actionResult) {
+            case DIE: return WavPlayer.WAV_DIE;
+        }
+
+        return null;
     }
 }

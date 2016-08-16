@@ -2,6 +2,7 @@ package ru.coldman.game.objects.gui.maps;
 
 import ru.coldman.game.abstracts.AbstractGameMap;
 import ru.coldman.game.abstracts.AbstractGameObject;
+import ru.coldman.game.abstracts.AbstractMovingObject;
 import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.enums.GameObjectType;
 import ru.coldman.game.enums.LocationType;
@@ -129,7 +130,7 @@ public class JTableGameMap implements DrawableMap {
     private class TimeMover implements ActionListener, MoveResultListener {
 
         private Timer timer;
-        private final static int MOVING_PAUSE = 500;
+        private final static int MOVING_PAUSE = 400;
         private final static int INIT_PAUSE = 1000;
 
         private TimeMover() {
@@ -154,7 +155,7 @@ public class JTableGameMap implements DrawableMap {
 
 
         @Override
-        public void notifyActionResult(ActionResult actionResult, GoldMan goldMan) {
+        public void notifyActionResult(ActionResult actionResult, final AbstractMovingObject abstractMovingObject) {
 
             switch (actionResult) {
                 case DIE: case WIN:{

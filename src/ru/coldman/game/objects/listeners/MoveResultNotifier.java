@@ -1,6 +1,7 @@
 package ru.coldman.game.objects.listeners;
 
 
+import ru.coldman.game.abstracts.AbstractMovingObject;
 import ru.coldman.game.enums.ActionResult;
 import ru.coldman.game.objects.GoldMan;
 
@@ -16,6 +17,6 @@ public interface MoveResultNotifier {
 
     void removeAllMoveListeners();
 
-    void notifyMoveListeners(ActionResult actionResult, GoldMan goldMan);
+     void notifyMoveListeners(ActionResult actionResult, AbstractMovingObject abstractMovingObject);
 
 }
